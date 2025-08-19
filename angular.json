@@ -26,9 +26,10 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "src/styles.scss"
-            ],
+            "styles": ["src/styles.scss"],
+            "stylePreprocessorOptions": {
+              "includePaths": ["src/app/design-system"]
+            },
             "server": "src/main.server.ts",
             "outputMode": "server",
             "ssr": {
@@ -85,12 +86,13 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "src/styles.scss"
-            ]
+            "styles": ["src/styles.scss"]
           }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "de48ec1e-6769-4016-afd9-18675a2ab0ce"
   }
 }

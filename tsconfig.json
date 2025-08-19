@@ -26,7 +26,9 @@
       "@shared/*": ["app/shared/*"],
       "@components/*": ["app/components/*"],
       "@layout/*": ["app/layout/*"],
-      "@features/*": ["app/features/*"]
+      "@features/*": ["app/features/*"],
+      "@designSystem/*": ["app/design-system/*"],
+      "@fonts/*": ["app/design-system/fonts/*"]
     }
   },
   "angularCompilerOptions": {

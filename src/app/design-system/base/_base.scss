@@ -1,0 +1,23 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: "Lora";
+  src: url("../fonts/lora/Lora-Italic.ttf") format("truetype");
+  font-weight: 400;
+}
+
+body {
+  font-family: "Lora", serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+html {
+  font-size: 62.5%;
+}

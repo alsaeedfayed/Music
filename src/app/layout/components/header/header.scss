@@ -1,0 +1,75 @@
+@import "abstract/mixins/mixins";
+@import "abstract/variables/colors";
+@import "abstract/variables/typography";
+.header {
+  &__search {
+    position: relative;
+    flex: 1;
+    max-width: 40rem;
+    margin: 0 1rem;
+
+    .search-input-wrapper {
+      display: flex;
+      align-items: center;
+      background: $color-dark-card;
+      border-radius: 8px;
+      padding: 0.5rem 0.75rem;
+      transition: all 0.5s ease;
+
+      &:focus-within {
+        box-shadow: 0 0 0 2px;
+        // color.scale($color-primary-gradient, $lightness: 30%);
+        transform: scale(1.02);
+      }
+    }
+
+    .search-icon {
+      margin-right: 0.5rem;
+      display: flex;
+      align-items: center;
+      color: $color-text-secondary;
+    }
+
+    input {
+      flex: 1;
+      border: none;
+      outline: none;
+      background: transparent;
+      color: $color-text-primary;
+      font-size: 1.6rem;
+
+      &::placeholder {
+        color: $color-text-secondary;
+      }
+    }
+
+    .search-results {
+      position: absolute;
+      top: 4.5rem;
+      left: 0;
+      right: 0px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 0.5rem;
+      overflow-y: auto;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+      width: 150%;
+      @media screen and (max-width: $breakpoint-sm) {
+        width: 100%;
+      }
+
+      &__item {
+        padding: 0.5rem;
+        border-radius: 6px;
+        cursor: pointer;
+        color: $color-text-secondary;
+        transition: background 0.2s;
+
+        &:hover {
+          background: $color-primary-gradient;
+          color: $color-text-primary;
+        }
+      }
+    }
+  }
+}

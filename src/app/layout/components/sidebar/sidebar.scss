@@ -36,10 +36,11 @@
       text-decoration: none;
       font-size: 1.8rem;
       width: 100%;
+      transition: background 0.3s ease;
+
       &:hover {
         background: $color-primary-gradient;
       }
-      transition: all 0.3s ease;
     }
   }
 }

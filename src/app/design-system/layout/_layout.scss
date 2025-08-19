@@ -22,7 +22,7 @@ $breakpoint-lg: 120rem;
 
   .content {
     flex: 1;
-    padding: $space-lg;
+    //padding: $space-lg;
     overflow-y: auto;
     background-color: $color-dark-bg;
     color: $color-text-primary;
@@ -67,8 +67,8 @@ $breakpoint-lg: 120rem;
   top: 6rem; // below header
   left: 0;
   height: calc(100vh - 6rem);
-  width: 26rem;
-  background: $color-dark-card;
+  width: 11rem;
+  // background: $color-dark-card;
   border-right: 0.1rem solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 0 2rem rgba(0, 0, 0, 0.4);
   transform: translateX(-100%);
@@ -155,7 +155,7 @@ $breakpoint-lg: 120rem;
 //main content
 .main {
   grid-area: main;
-  padding: $space-lg;
+  //padding: $space-lg;
   background: linear-gradient(160deg, #0f0f0f 0%, #1a1a1a 100%);
   border-radius: 1.2rem;
   color: $color-text-secondary;

@@ -31,7 +31,10 @@
               "node_modules/boxicons/css/boxicons.min.css"
             ],
             "stylePreprocessorOptions": {
-              "includePaths": ["src/app/design-system"]
+              "includePaths": [
+                "src/app/design-system",
+                "src/app/design-system/abstract"
+              ]
             },
             "server": "src/main.server.ts",
             "outputMode": "server",

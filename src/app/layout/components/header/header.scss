@@ -72,4 +72,14 @@
       }
     }
   }
+
+  &__actions {
+    @include flex-center;
+    gap: $space-md;
+
+    svg {
+      color: $color-text-primary;
+      cursor: pointer;
+    }
+  }
 }

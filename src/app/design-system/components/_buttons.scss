@@ -1,0 +1,22 @@
+@import "abstract/mixins/mixins";
+@import "abstract/variables/colors";
+@import "abstract/variables/typography";
+
+.btn-primary {
+  position: relative;
+  display: inline-block;
+  padding: 0.6rem 1.4rem;
+  border: 1px solid $color-primary;
+  border-radius: 0.8rem;
+  color: $color-text-primary;
+  font-weight: 500;
+  font-size: 1.7rem;
+  background: $color-primary-gradient;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s ease, border-color 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}

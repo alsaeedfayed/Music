@@ -1,0 +1,16 @@
+<div class="app-wrapper">
+  <app-header (menuClicked)="toggleSideBar()"></app-header>
+
+  <div class="main">
+    <app-sidebar
+      [open]="isSideBarOpen()"
+      (closeSidebar)="closeSideBar()"
+    ></app-sidebar>
+    <div class="content" (click)="closeSideBar()">
+      <div>
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</div>

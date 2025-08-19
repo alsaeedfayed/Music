@@ -10,100 +10,176 @@ $breakpoint-lg: 120rem;
 //layout wrapper
 
 .app-wrapper {
-  display: grid;
-  grid-template-areas:
-    "header header"
-    "sidebar main"
-    "footer footer";
-  grid-template-columns: 25rem 1fr;
-  grid-template-rows: auto 1fr auto;
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
-  background-color: $color-dark-bg;
-  color: $color-text-primary;
 
-  //small screen
-  @media screen and (max-width: $breakpoint-md) {
-    grid-template-areas:
-      "header"
-      "main"
-      "footer";
-    grid-template-columns: 1fr;
+  .main {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+  }
+
+  .content {
+    flex: 1;
+    padding: $space-lg;
+    overflow-y: auto;
+    background-color: $color-dark-bg;
+    color: $color-text-primary;
+  }
+
+  @media (max-width: $breakpoint-md) {
+    .main {
+      flex-direction: column;
+    }
   }
 }
 
 //header
+
 .header {
-  grid-area: header;
-  @include flex-center;
+  display: flex;
+  align-items: center;
   justify-content: space-between;
-  padding: $space-md $space-lg;
+  height: 6rem;
+  padding: 0 $space-lg;
   background: $color-dark-bg;
-  border-bottom: 0.1rem solid rgba(255, 255, 255, 0.1);
-  position: sticky;
-  top: 0;
-  z-index: 100rem;
-  .logo {
-    font-size: 2.4rem;
-    font-weight: bold;
-    @include text-gradient($color-primary-gradient);
-  }
-  .menu-toggle {
-    display: none;
-    font-size: 2.4rem;
+  color: $color-text-primary;
+  box-shadow: 0 0.4rem 1rem rgba(0, 0, 0, 0.2);
+
+  .menu-icon {
+    font-size: 2.6rem;
+    background: none;
+    border: none;
+    color: $color-text-primary;
     cursor: pointer;
-    @media screen and (max-width: $breakpoint-md) {
+    display: none;
+
+    @media (max-width: $breakpoint-md) {
       display: block;
     }
   }
 }
 
-//sidebar
+// Sidebar
 .sidebar {
-  grid-area: sidebar;
+  position: fixed;
+  top: 6rem; // below header
+  left: 0;
+  height: calc(100vh - 6rem);
+  width: 26rem;
   background: $color-dark-card;
-  padding: $space-lg $space-md;
-  @include glass-card;
+  border-right: 0.1rem solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 2rem rgba(0, 0, 0, 0.4);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+  z-index: 1000;
   display: flex;
   flex-direction: column;
-  gap: $space-md;
-  transition: transform 0.3s ease-in-out;
-  //collapsed state for small screens
-  &.closed {
-    transform: translateX(-100%);
+  justify-content: space-between;
+
+  &.open {
+    transform: translateX(0);
   }
-  @media screen and (max-width: $breakpoint-md) {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    z-index: 100rem;
+
+  .close-btn {
+    background: none;
+    border: none;
+    font-size: 2.4rem;
+    color: $color-text-primary;
+    cursor: pointer;
+    align-self: flex-end;
+    margin: $space-md;
+    display: block;
+
+    @media (min-width: $breakpoint-md) {
+      display: none;
+    }
+  }
+
+  @media (min-width: $breakpoint-md) {
+    position: static;
+    transform: none;
+    height: auto;
+  }
+}
+
+// Sidebar backdrop
+.sidebar-backdrop {
+  position: fixed;
+  top: 6rem;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 500;
+
+  @media (min-width: $breakpoint-md) {
+    display: none;
+  }
+}
+
+.footer {
+  background: $color-dark-bg;
+  color: $color-text-primary;
+  padding: $space-md $space-lg;
+  border-top: 0.1rem solid rgba(255, 255, 255, 0.08);
+
+  .footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $space-sm;
+
+    @media (min-width: $breakpoint-md) {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: $space-md;
+
+      a {
+        color: $color-text-primary;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
   }
 }
 
 //main content
 .main {
   grid-area: main;
-  padding: $space-md $space-lg;
-  background: $color-dark-bg;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  text-align: center;
-  font-size: 1.4rem;
+  padding: $space-lg;
+  background: linear-gradient(160deg, #0f0f0f 0%, #1a1a1a 100%);
+  border-radius: 1.2rem;
   color: $color-text-secondary;
-}
+  font-size: 1.6rem;
+  min-height: 80vh;
+  box-shadow: 0 0 3rem rgba(0, 0, 0, 0.5);
 
-// Utility: overlay for mobile sidebar
-.sidebar-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 998;
-
-  &.active {
-    display: block;
+  & > section {
+    margin-bottom: $space-xl;
   }
 
-  @media (min-width: $breakpoint-md) {
-    display: none;
+  h2 {
+    font-size: 2.4rem;
+    margin-bottom: $space-md;
+    @include text-gradient($color-primary-gradient);
+    text-align: left;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }

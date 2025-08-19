@@ -1,0 +1,13 @@
+<div class="sidebar" [class.open]="open">
+  <div class="menu-section">
+    <ul></ul>
+  </div>
+
+  <div class="logout-section"></div>
+</div>
+
+<!-- Optional backdrop -->
+@if (open) {
+<div class="sidebar-backdrop" (click)="closeSidebar.emit()"></div>
+
+}

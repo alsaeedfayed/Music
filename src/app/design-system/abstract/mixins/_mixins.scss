@@ -1,0 +1,17 @@
+@mixin glass-card($blur: 10px) {
+  background: $color-dark-card;
+  backdrop-filter: blur($blur);
+  border-radius: 16px;
+}
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin text-gradient($gradient) {
+  background: $gradient;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

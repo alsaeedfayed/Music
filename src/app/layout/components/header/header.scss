@@ -80,5 +80,14 @@
       color: var(--color-text-primary);
       cursor: pointer;
     }
+    .login {
+      color: #fff;
+    }
+    .theme-toggle {
+      outline: none;
+      border: none;
+      background: none;
+      cursor: pointer;
+    }
   }
 }

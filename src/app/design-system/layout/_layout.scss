@@ -19,8 +19,8 @@
     flex: 1;
     //padding: $space-lg;
     overflow-y: auto;
-    background-color: $color-dark-bg;
-    color: $color-text-primary;
+    background-color: var(--color-bg);
+    color: var(--color-text-primary);
   }
 
   @media (max-width: $breakpoint-md) {
@@ -38,14 +38,12 @@
   justify-content: space-between;
   height: 6rem;
   padding: 0 $space-lg;
-  background: #151414;
-  border-bottom: 0.1rem solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 0 2rem rgba(0, 0, 0, 0.4);
+  background: var(--color-layout-bg);
   .menu-icon {
     font-size: 2.6rem;
     background: none;
     border: none;
-    color: $color-text-primary;
+    color: var(--color-text-primary);
     cursor: pointer;
     display: none;
 
@@ -60,9 +58,10 @@
   position: fixed;
   top: 6rem; // below header
   left: 0;
-  height: calc(100vh - 6rem);
+  //height: calc(100vh - 6rem);
+  height: 100%;
   width: 11rem;
-  // background: $color-dark-card;
+  background: var(--color-layout-bg);
   border-right: 0.1rem solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 0 2rem rgba(0, 0, 0, 0.4);
   transform: translateX(-100%);
@@ -80,7 +79,7 @@
     background: none;
     border: none;
     font-size: 2.4rem;
-    color: $color-text-primary;
+    color: var(--color-text-primary);
     cursor: pointer;
     align-self: flex-end;
     margin: $space-md;
@@ -94,7 +93,7 @@
   @media (min-width: $breakpoint-md) {
     position: static;
     transform: none;
-    height: auto;
+    height: 100%;
   }
 }
 
@@ -114,8 +113,8 @@
 }
 
 .footer {
-  background: $color-dark-bg;
-  color: $color-text-primary;
+  background: var(--color-layout-bg);
+  color: var(--color-text-primary);
   padding: $space-md $space-lg;
   border-top: 0.1rem solid rgba(255, 255, 255, 0.08);
 
@@ -135,7 +134,7 @@
       gap: $space-md;
 
       a {
-        color: $color-text-primary;
+        color: var(--color-text-primary);
         text-decoration: none;
 
         &:hover {
@@ -150,12 +149,11 @@
 .main {
   grid-area: main;
   //padding: $space-lg;
-  background: linear-gradient(160deg, #0f0f0f 0%, #1a1a1a 100%);
+  background: linear-gradient(160deg, var(--color-bg) 0%, var(--color-bg) 100%);
   //border-radius: 1.2rem;
-  color: $color-text-secondary;
+  color: var(--color-text-secondary);
   font-size: 1.6rem;
   min-height: 80vh;
-  box-shadow: 0 0 3rem rgba(0, 0, 0, 0.5);
 
   & > section {
     margin-bottom: $space-xl;
@@ -164,7 +162,7 @@
   h2 {
     font-size: 2.4rem;
     margin-bottom: $space-md;
-    @include text-gradient($color-primary-gradient);
+    @include text-gradient(var(--color-primary-gradient));
     text-align: left;
   }
 }

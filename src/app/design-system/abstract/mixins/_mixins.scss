@@ -1,5 +1,5 @@
 @mixin glass-card($blur: 10px) {
-  background: $color-dark-card;
+  background: var(--color-card);
   backdrop-filter: blur($blur);
   border-radius: 16px;
 }

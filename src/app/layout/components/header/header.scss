@@ -11,7 +11,7 @@
     .search-input-wrapper {
       display: flex;
       align-items: center;
-      background: $color-dark-card;
+      background: var(--color-card);
       border-radius: 8px;
       padding: 0.5rem 0.75rem;
       transition: all 0.5s ease;
@@ -27,7 +27,7 @@
       margin-right: 0.5rem;
       display: flex;
       align-items: center;
-      color: $color-text-secondary;
+      color: var(--color-text-secondary);
     }
 
     input {
@@ -35,11 +35,11 @@
       border: none;
       outline: none;
       background: transparent;
-      color: $color-text-primary;
+      color: var(--color-text-primary);
       font-size: 1.6rem;
 
       &::placeholder {
-        color: $color-text-secondary;
+        color: var(--color-text-secondary);
       }
     }
 
@@ -62,12 +62,12 @@
         padding: 0.5rem;
         border-radius: 6px;
         cursor: pointer;
-        color: $color-text-secondary;
+        color: var(--color-text-secondary);
         transition: background 0.2s;
 
         &:hover {
-          background: $color-primary-gradient;
-          color: $color-text-primary;
+          background: var(--color-primary-gradient);
+          color: var(--color-text-primary);
         }
       }
     }
@@ -78,7 +78,7 @@
     gap: $space-md;
 
     svg {
-      color: $color-text-primary;
+      color: var(--color-text-primary);
       cursor: pointer;
     }
   }

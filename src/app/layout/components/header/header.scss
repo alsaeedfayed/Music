@@ -11,13 +11,12 @@
     .search-input-wrapper {
       display: flex;
       align-items: center;
-      background: var(--color-card);
-      border-radius: 8px;
-      padding: 0.5rem 0.75rem;
+      background: var(--color-bg);
+      border-radius: 18px;
+      padding: 1.2rem 0.95rem;
       transition: all 0.5s ease;
 
       &:focus-within {
-        box-shadow: 0 0 0 2px;
         // color.scale($color-primary-gradient, $lightness: 30%);
         transform: scale(1.02);
       }

@@ -7,6 +7,15 @@ import { Inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
 export class Theme {
   private theme = signal<'light' | 'dark'>('light');
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+    if (isPlatformBrowser(this.platformId)) {
+      const savedTheme = localStorage.getItem('theme') as
+        | 'light'
+        | 'dark'
+        | null;
+      if (savedTheme) {
+        this.theme.set(savedTheme);
+      }
+    }
     this.setTheme(this.theme());
   }
   getTheme() {
@@ -16,6 +25,7 @@ export class Theme {
     if (isPlatformBrowser(this.platformId)) {
       document.body.classList.remove('theme-dark', 'theme-light');
       document.body.classList.add(`theme-${theme}`);
+      localStorage.setItem('theme', theme); // persist
     }
   }
 

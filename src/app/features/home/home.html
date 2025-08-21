@@ -1,5 +1,6 @@
 <div class="container">
-  <app-cover>
+  @for (album of albums(); track $index) {
+  <app-cover [coverData]="album" (menuAction)="onMenuAction($event, album)">
     <!-- Custom actions injected via ng-content -->
     <li customAction (click)="onCustomAction('download')">
       <div class="context-menu__card--item">
@@ -8,4 +9,5 @@
       </div>
     </li>
   </app-cover>
+  }
 </div>

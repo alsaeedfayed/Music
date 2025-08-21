@@ -1,12 +1,12 @@
 @if (coverData()) {
 <div class="card">
-  <img [src]="coverData().coverUrl" alt="Card image" class="card-image" />
+  <img [src]="coverData().coverUrl?.()" alt="Card image" class="card-image" />
   <div class="card-icons">
-    <i (click)="onAddToFavourites(coverData)" class="bx bx-heart"></i>
-    <i (click)="onPlay(coverData)" class="bx bx-play"></i>
+    <i (click)="onAddToFavourites(coverData())" class="bx bx-heart"></i>
+    <i (click)="onPlay(coverData())" class="bx bx-play"></i>
     <!-- Menu Component -->
     <i>
-      <app-context-menu (menuAction)="onMenuAction($event, coverData)">
+      <app-context-menu (menuAction)="onMenuAction($event, coverData())">
         <!-- Custom actions injected via ng-content -->
         <ng-content select="[customAction]"></ng-content>
       </app-context-menu>

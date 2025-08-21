@@ -8,14 +8,17 @@ import { ContextMenu } from '../context-menu/context-menu';
   templateUrl: './cover.html',
   styleUrl: './cover.scss',
 })
-export class Cover<T extends Cover_Model> {
+export class Cover<T> {
   //cover data
-  @Input() coverData: WritableSignal<T> = signal({} as T);
+  @Input() coverData: WritableSignal<Cover_Model<T>> = signal(
+    {} as Cover_Model<T>
+  );
 
-  onAddToFavourites(coverData: WritableSignal<T>): void {}
-  onPlay(coverData: WritableSignal<T>): void {}
+  onAddToFavourites(coverData: Cover_Model<T>): void {}
+  onPlay(coverData: Cover_Model<T>): void {}
 
-  onMenuAction(e: string, coverData: WritableSignal<T>): void {
+  onMenuAction(e: string, coverData: Cover_Model<T>): void {
     // Handle context menu actions
+    console.log(e, coverData);
   }
 }

@@ -1,6 +1,6 @@
 export interface ALBUMS {
   data?: ALBUM_DATA[] | null;
-  total: number;
+  total?: number;
 }
 export interface ALBUM_DATA {
   id: number;

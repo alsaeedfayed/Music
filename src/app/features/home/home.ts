@@ -1,9 +1,10 @@
 import { Component, inject } from '@angular/core';
 import { Explore } from './services/explore';
+import { Cover } from '@app/components/cover/cover';
 
 @Component({
   selector: 'app-home',
-  imports: [],
+  imports: [Cover],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })

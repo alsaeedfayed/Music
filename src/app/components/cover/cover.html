@@ -1,0 +1,14 @@
+@if (coverData()) {
+<div class="card">
+  <img [src]="coverData().coverUrl" alt="Card image" class="card-image" />
+  <div class="card-icons">
+    <i (click)="onAddToFavourites(coverData)" class="bx bx-heart"></i>
+    <i (click)="onPlay(coverData)" class="bx bx-play"></i>
+    <i (click)="onShowMore(coverData)" class="bx bx-dots-horizontal"></i>
+    @if (coverData().icons) { @for (icon of coverData().icons!(); track $index)
+    {
+    <i [class]="icon"></i>
+    } }
+  </div>
+</div>
+}

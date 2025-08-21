@@ -1,4 +1,8 @@
-export interface NEW_RELEASES {
+export interface ALBUMS {
+  data?: ALBUM_DATA[] | null;
+  total: number;
+}
+export interface ALBUM_DATA {
   id: number;
   title: string;
   link: string;
@@ -15,7 +19,6 @@ export interface NEW_RELEASES {
   artist: Artist;
   type: string;
 }
-
 export interface NEW_TRACKS {
   data?: TRACKS_DATA[] | null;
   total: number;

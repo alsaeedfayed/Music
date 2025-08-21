@@ -1,44 +1,13 @@
+@import "abstract/variables/typography";
 .container {
-  width: 100%;
-  padding: 3rem 3rem;
-}
-
-.text-primary {
-  color: var(--color-text-primary);
-}
-
-.text-secondary {
-  color: var(--color-text-secondary);
-}
-
-.bg-primary {
-  background-color: var(--color-primary);
-}
-
-.bg-secondary {
-  background-color: var(--color-secondary);
-}
-
-.bg-card {
-  background-color: var(--color-card);
-}
-
-.bg-layout {
-  background-color: var(--color-layout-bg);
-}
-
-.border-color {
-  border-color: var(--color-border);
-}
-
-.text-error {
-  color: var(--color-error);
-}
-
-.bg-gradient-primary {
-  background: var(--color-primary-gradient);
-}
-
-.bg-gradient-secondary {
-  background: var(--color-secondary-gradient);
+  width: 100% !important;
+  padding: 3rem 10rem !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  max-width: none !important;
+  @media screen and (max-width: $breakpoint-md) {
+    padding: 3rem 2rem !important;
+    display: flex !important;
+    justify-content: center !important;
+  }
 }

@@ -1,8 +1,9 @@
+@import "abstract/mixins/mixins";
 .card {
   position: relative;
   width: 300px;
   height: 200px;
-  overflow: hidden;
+  // overflow: hidden;
   border-radius: 12px;
   cursor: pointer;
 
@@ -11,6 +12,8 @@
     height: 100%;
     object-fit: cover;
     transition: filter 0.3s ease;
+    overflow: hidden;
+    display: block;
   }
 
   .card-icons {
@@ -30,6 +33,7 @@
       border-radius: 50%;
       font-size: 2.2rem;
       transition: all 0.3s;
+      @include flex-center;
 
       &:hover {
         transform: scale(1.1);

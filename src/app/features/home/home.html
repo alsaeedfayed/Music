@@ -1,3 +1,11 @@
 <div class="container">
-  <app-cover />
+  <app-cover>
+    <!-- Custom actions injected via ng-content -->
+    <li customAction (click)="onCustomAction('download')">
+      <div class="context-menu__card--item">
+        <i class="bx bx-download"></i>
+        <span>Download</span>
+      </div>
+    </li>
+  </app-cover>
 </div>

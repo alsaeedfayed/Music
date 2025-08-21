@@ -1,0 +1,31 @@
+<div class="context-menu">
+  <!-- Trigger -->
+  <i class="bx bx-dots-horizontal" (click)="toggleMenu()"></i>
+
+  <!-- Menu -->
+  @if (isOpen()) {
+  <div class="context-menu__card">
+    <ul class="default-actions">
+      <li (click)="actionClicked('share')">
+        <div class="context-menu__card--item">
+          <i class="bx bx-share-alt"></i>
+          <span>Share</span>
+        </div>
+      </li>
+      <li (click)="actionClicked('artist')">
+        <div class="context-menu__card--item">
+          <i class="bx bx-user"></i>
+          <span>Go To Artist</span>
+        </div>
+      </li>
+      <li (click)="actionClicked('album')">
+        <div class="context-menu__card--item">
+          <i class="bx bx-album"></i>
+          <span>Go To Album</span>
+        </div>
+      </li>
+      <ng-content></ng-content>
+    </ul>
+  </div>
+  }
+</div>

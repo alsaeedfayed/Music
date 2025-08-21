@@ -4,7 +4,13 @@
   <div class="card-icons">
     <i (click)="onAddToFavourites(coverData)" class="bx bx-heart"></i>
     <i (click)="onPlay(coverData)" class="bx bx-play"></i>
-    <i (click)="onShowMore(coverData)" class="bx bx-dots-horizontal"></i>
+    <!-- Menu Component -->
+    <i>
+      <app-context-menu (menuAction)="onMenuAction($event, coverData)">
+        <!-- Custom actions injected via ng-content -->
+        <ng-content select="[customAction]"></ng-content>
+      </app-context-menu>
+    </i>
     @if (coverData().icons) { @for (icon of coverData().icons!(); track $index)
     {
     <i [class]="icon"></i>

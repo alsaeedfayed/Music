@@ -1,13 +1,20 @@
 <div class="container">
-  @for (album of albums(); track $index) {
-  <app-cover [coverData]="album" (menuAction)="onMenuAction($event, album)">
-    <!-- Custom actions injected via ng-content -->
-    <li customAction (click)="onCustomAction('download')">
-      <div class="context-menu__card--item">
-        <i class="bx bx-download"></i>
-        <span>Download</span>
-      </div>
-    </li>
-  </app-cover>
-  }
+  <div class="albums">
+    <h1 class="text">NEW RELEASES</h1>
+    <div class="albums__header">
+      <p>Fresh picks of the week</p>
+    </div>
+    <div class="albums__content"></div>
+    @for (album of albums(); track $index) {
+    <app-cover [coverData]="album" (menuAction)="onMenuAction($event, album)">
+      <!-- Custom actions injected via ng-content -->
+      <li customAction (click)="onCustomAction('download')">
+        <div class="context-menu__card--item">
+          <i class="bx bx-download"></i>
+          <span>Download</span>
+        </div>
+      </li>
+    </app-cover>
+    }
+  </div>
 </div>

@@ -14,8 +14,9 @@
     color: var(--color-text-primary);
     border-radius: 0.5rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    z-index: 20;
+    z-index: 9999;
     padding: 0.5rem;
+
     @media screen and (max-width: $breakpoint-sm) {
       min-width: 20rem;
     }

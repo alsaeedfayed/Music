@@ -1,20 +1,38 @@
 <div class="container">
-  <div class="albums">
+  <div class="albums w-100">
     <div class="albums__header">
-      <h1 class="text-primary">NEW RELEASES</h1>
-      <p class="text-primary">Fresh picks of the week</p>
+      <h1 class="text-primary mb-5">NEW RELEASES</h1>
+      <div class="d-flex mb-2">
+        <p class="text-primary fs-3 fw-medium">Fresh picks of the week</p>
+      </div>
     </div>
-    <div class="albums__content"></div>
-    @for (album of albums(); track $index) {
-    <app-cover [coverData]="album" (menuAction)="onMenuAction($event, album)">
-      <!-- Custom actions injected via ng-content -->
-      <li customAction (click)="onCustomAction('download')">
-        <div class="context-menu__card--item">
-          <i class="bx bx-download"></i>
-          <span>Download</span>
+    <!-- Swiper container -->
+    <div class="swiper albums-swiper">
+      <div class="swiper-wrapper">
+        @for (album of albums(); track $index) {
+        <div class="swiper-slide">
+          <app-cover
+            [coverData]="album"
+            (menuAction)="onMenuAction($event, album)"
+          >
+            <!-- Custom actions injected via ng-content -->
+            <li customAction (click)="onCustomAction('download', album)">
+              <div class="context-menu__card--item">
+                <i class="bx bx-download"></i>
+                <span>Download</span>
+              </div>
+            </li>
+          </app-cover>
         </div>
-      </li>
-    </app-cover>
-    }
+        }
+      </div>
+
+      <!-- Optional navigation -->
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+
+      <!-- Optional pagination -->
+      <div class="swiper-pagination"></div>
+    </div>
   </div>
 </div>

@@ -1,4 +1,11 @@
-import { Component, Input, signal, WritableSignal } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  signal,
+  WritableSignal,
+} from '@angular/core';
 import { Cover_Model } from './models/cover.model';
 import { ContextMenu } from '../context-menu/context-menu';
 
@@ -13,12 +20,14 @@ export class Cover<T> {
   @Input() coverData: WritableSignal<Cover_Model<T>> = signal(
     {} as Cover_Model<T>
   );
+  @Output() play!: EventEmitter<Cover_Model<T>>;
 
   onAddToFavourites(coverData: Cover_Model<T>): void {}
-  onPlay(coverData: Cover_Model<T>): void {}
+  onPlay(coverData: Cover_Model<T>): void {
+    this.play.emit(coverData);
+  }
 
   onMenuAction(e: string, coverData: Cover_Model<T>): void {
     // Handle context menu actions
-    console.log(e, coverData);
   }
 }

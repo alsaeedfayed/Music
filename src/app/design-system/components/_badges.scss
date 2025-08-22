@@ -1,0 +1,10 @@
+@import "abstract/mixins/mixins";
+@import "abstract/variables/colors";
+@import "abstract/variables/typography";
+
+.badge-outline {
+  padding: 0.3rem;
+  border: 1px solid var(--color-primary);
+  color: var(--color-text-secondary);
+  border-radius: 10%;
+}

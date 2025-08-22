@@ -22,6 +22,7 @@ import { Cover_Model } from '@app/components/cover/models/cover.model';
 // Swiper imports
 import Swiper from 'swiper';
 import { SwipperCmp } from '@app/components/swipper/swipper';
+import { sign } from 'node:crypto';
 
 @Component({
   selector: 'app-home',
@@ -62,7 +63,12 @@ export class Home implements OnInit, AfterViewInit, OnDestroy {
               signal<Cover_Model<ALBUM_DATA>>({
                 coverUrl: signal(album.cover_medium),
                 rawData: album,
+                title: signal(album.title),
+                type: signal(album.type),
                 icons: signal(['bx bx-share']),
+                artistName: signal(album.artist.name),
+                artistImg: signal(album.artist.picture_small),
+                artistType: signal(album.artist.type),
               })
             );
             this.albums.set(albumsCover);
@@ -72,7 +78,12 @@ export class Home implements OnInit, AfterViewInit, OnDestroy {
             const tracksCover = res.tracks.data.map((track) =>
               signal<Cover_Model<TRACKS_DATA>>({
                 coverUrl: signal(track.album.cover_medium),
+                title: signal(track.title),
+                type: signal(track.type),
                 rawData: track,
+                artistName: signal(track.artist.name),
+                artistImg: signal(track.artist.picture_small),
+                artistType: signal(track.artist.type),
               })
             );
             this.tracks.set(tracksCover);
@@ -82,6 +93,9 @@ export class Home implements OnInit, AfterViewInit, OnDestroy {
             const podcastCover = res.podcasts.data.map((podcast) =>
               signal<Cover_Model<POD_CAST_DATA>>({
                 coverUrl: signal(podcast.picture_medium),
+                title: signal(podcast.title),
+                type: signal(podcast.type),
+                artistName: signal(podcast.fans),
                 rawData: podcast,
               })
             );

@@ -62,7 +62,7 @@ export class SwipperCmp implements AfterViewInit, OnDestroy {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
       },
-      // pagination: { el: '.swiper-pagination' },
+      pagination: { el: '.swiper-pagination' },
     });
   }
 

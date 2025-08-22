@@ -77,6 +77,16 @@ export class Home implements OnInit, AfterViewInit, OnDestroy {
             );
             this.tracks.set(tracksCover);
           }
+
+          if (res.podcasts?.data?.length) {
+            const podcastCover = res.podcasts.data.map((podcast) =>
+              signal<Cover_Model<POD_CAST_DATA>>({
+                coverUrl: signal(podcast.picture_medium),
+                rawData: podcast,
+              })
+            );
+            this.podcasts.set(podcastCover);
+          }
         },
         error: (err) => {
           console.error('Explore data fetch error:', err);

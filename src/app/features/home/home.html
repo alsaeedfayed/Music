@@ -30,7 +30,7 @@
   @if (tracks().length > 0) {
   <div class="tracks w-100">
     <div class="tracks__header">
-      <h1 class="text-primary mb-5">Tracks Popular For You</h1>
+      <h1 class="text-primary mb-2">Tracks Popular For You</h1>
       <div class="d-flex mb-2">
         <p class="text-primary fs-3 fw-medium"></p>
       </div>
@@ -42,6 +42,33 @@
           (menuAction)="onMenuAction($event, track)"
         >
           <li customAction (click)="onCustomAction('download', track)">
+            <div class="context-menu__card--item">
+              <i class="bx bx-download"></i>
+              <span>Download</span>
+            </div>
+          </li>
+        </app-cover>
+      </ng-template>
+    </app-swipper>
+  </div>
+  }
+
+  <!-- POD CASTS -->
+  @if (podcasts().length > 0) {
+  <div class="podcasts w-100">
+    <div class="podcasts__header">
+      <h1 class="text-primary mb-2">POD CASTS</h1>
+      <div class="d-flex mb-2">
+        <p class="text-primary fs-3 fw-medium"></p>
+      </div>
+    </div>
+    <app-swipper [data]="podcasts">
+      <ng-template let-podcast>
+        <app-cover
+          [coverData]="podcast"
+          (menuAction)="onMenuAction($event, podcast)"
+        >
+          <li customAction (click)="onCustomAction('download', podcast)">
             <div class="context-menu__card--item">
               <i class="bx bx-download"></i>
               <span>Download</span>

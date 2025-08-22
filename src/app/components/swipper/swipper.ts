@@ -28,7 +28,7 @@ Swiper.use([Navigation, Pagination]);
 export class SwipperCmp implements AfterViewInit, OnDestroy {
   @Input({ required: true }) data!: WritableSignal<any[]>;
   @ContentChild(TemplateRef) slideTemplate!: TemplateRef<any>;
-
+  @Input() delayTime!: number;
   private swiperInstance?: Swiper;
   private platformId = inject(PLATFORM_ID);
 
@@ -51,7 +51,7 @@ export class SwipperCmp implements AfterViewInit, OnDestroy {
     }
 
     this.swiperInstance = new Swiper('.swiper', {
-      spaceBetween: 10,
+      spaceBetween: 0,
       breakpoints: {
         768: { slidesPerView: 2 },
         1024: { slidesPerView: 3 },
@@ -59,10 +59,17 @@ export class SwipperCmp implements AfterViewInit, OnDestroy {
         1600: { slidesPerView: 5 },
       },
       navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
+        nextEl: '.custom-next',
+        prevEl: '.custom-prev',
       },
-      pagination: { el: '.swiper-pagination' },
+      // pagination: { el: '.swiper-pagination' },
+      autoplay: {
+        delay: 2500,
+        disableOnInteraction: true,
+        pauseOnMouseEnter: true,
+        waitForTransition: true,
+      },
+      loop: true, // infinite loop
     });
   }
 

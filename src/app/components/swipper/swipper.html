@@ -1,5 +1,10 @@
 <!-- Swiper container -->
 <div class="swiper">
+  <!-- Top bar with prev/next -->
+  <div class="swiper-top-nav d-flex gap-4 justify-content-end">
+    <i class="bx bx-chevron-left fs-1 custom-prev"></i>
+    <i class="bx bx-chevron-right fs-1 custom-next"></i>
+  </div>
   <div class="swiper-wrapper">
     @for (item of data(); track $index) {
     <div class="swiper-slide">
@@ -9,10 +14,6 @@
     </div>
     }
   </div>
-
-  <!-- Optional navigation -->
-  <div class="swiper-button-next"></div>
-  <div class="swiper-button-prev"></div>
 
   <!-- Optional pagination -->
   <div class="swiper-pagination"></div>

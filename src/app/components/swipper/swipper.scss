@@ -1,3 +1,4 @@
+@import "abstract/variables/colors";
 .swiper-slide {
   height: auto;
 }
@@ -16,7 +17,25 @@
 ::ng-deep .swiper-wrapper {
   overflow: visible !important;
 }
-::ng-deep .swiper-slide {
+
+::ng-deep .swiper {
   overflow: visible !important;
-  position: relative; // Required for absolute positioning inside
+}
+
+.swiper-top-nav {
+  position: absolute;
+  top: -4rem;
+  right: 0;
+
+  i {
+    color: var(--color-primary);
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    transition: all 0.3s ease;
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
 }

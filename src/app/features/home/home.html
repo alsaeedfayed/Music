@@ -8,7 +8,7 @@
         <p class="text-primary fs-3 fw-medium">Fresh picks of the week</p>
       </div>
     </div>
-    <app-swipper [data]="albums">
+    <app-swipper [data]="albums" [delayTime]="2300">
       <ng-template let-album>
         <app-cover
           [coverData]="album"
@@ -35,7 +35,7 @@
         <p class="text-primary fs-3 fw-medium"></p>
       </div>
     </div>
-    <app-swipper [data]="tracks">
+    <app-swipper [data]="tracks" [delayTime]="3000">
       <ng-template let-track>
         <app-cover
           [coverData]="track"
@@ -62,7 +62,7 @@
         <p class="text-primary fs-3 fw-medium"></p>
       </div>
     </div>
-    <app-swipper [data]="podcasts">
+    <app-swipper [data]="podcasts" [delayTime]="3500">
       <ng-template let-podcast>
         <app-cover
           [coverData]="podcast"

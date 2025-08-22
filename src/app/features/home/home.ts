@@ -11,7 +11,13 @@ import {
 import { Explore } from './services/explore';
 import { Cover } from '@app/components/cover/cover';
 import { forkJoin, Subject, takeUntil } from 'rxjs';
-import { ALBUM_DATA, NEW_TRACKS, POD_CASTS } from './models/explore.model';
+import {
+  ALBUM_DATA,
+  NEW_TRACKS,
+  POD_CAST_DATA,
+  POD_CASTS,
+  TRACKS_DATA,
+} from './models/explore.model';
 import { Cover_Model } from '@app/components/cover/models/cover.model';
 // Swiper imports
 import Swiper from 'swiper';
@@ -29,8 +35,13 @@ export class Home implements OnInit, AfterViewInit, OnDestroy {
   albums: WritableSignal<WritableSignal<Cover_Model<ALBUM_DATA>>[]> = signal(
     []
   );
-  tracks: WritableSignal<NEW_TRACKS> = signal({} as NEW_TRACKS);
-  podcasts: WritableSignal<POD_CASTS> = signal({} as POD_CASTS);
+
+  tracks: WritableSignal<WritableSignal<Cover_Model<TRACKS_DATA>>[]> = signal(
+    []
+  );
+
+  podcasts: WritableSignal<WritableSignal<Cover_Model<POD_CAST_DATA>>[]> =
+    signal([]);
 
   private $destroy = new Subject<void>();
   private exploreService = inject(Explore);
@@ -57,8 +68,15 @@ export class Home implements OnInit, AfterViewInit, OnDestroy {
             this.albums.set(albumsCover);
           }
 
-          this.tracks.set(res.tracks);
-          this.podcasts.set(res.podcasts);
+          if (res.tracks?.data?.length) {
+            const tracksCover = res.tracks.data.map((track) =>
+              signal<Cover_Model<TRACKS_DATA>>({
+                coverUrl: signal(track.album.cover_medium),
+                rawData: track,
+              })
+            );
+            this.tracks.set(tracksCover);
+          }
         },
         error: (err) => {
           console.error('Explore data fetch error:', err);

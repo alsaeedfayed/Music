@@ -1,4 +1,6 @@
 <div class="container">
+  <!-- ALBUMS -->
+  @if (albums().length > 0) {
   <div class="albums w-100">
     <div class="albums__header">
       <h1 class="text-primary mb-5">NEW RELEASES</h1>
@@ -6,9 +8,7 @@
         <p class="text-primary fs-3 fw-medium">Fresh picks of the week</p>
       </div>
     </div>
-    <!-- ALBUMS -->
-    @if (albums().length > 0) {
-    <app-swipper [data]="albums" class="albums-swiper">
+    <app-swipper [data]="albums">
       <ng-template let-album>
         <app-cover
           [coverData]="album"
@@ -23,6 +23,33 @@
         </app-cover>
       </ng-template>
     </app-swipper>
-    }
   </div>
+  }
+
+  <!-- TRACKS -->
+  @if (tracks().length > 0) {
+  <div class="tracks w-100">
+    <div class="tracks__header">
+      <h1 class="text-primary mb-5">Tracks Popular For You</h1>
+      <div class="d-flex mb-2">
+        <p class="text-primary fs-3 fw-medium"></p>
+      </div>
+    </div>
+    <app-swipper [data]="tracks">
+      <ng-template let-track>
+        <app-cover
+          [coverData]="track"
+          (menuAction)="onMenuAction($event, track)"
+        >
+          <li customAction (click)="onCustomAction('download', track)">
+            <div class="context-menu__card--item">
+              <i class="bx bx-download"></i>
+              <span>Download</span>
+            </div>
+          </li>
+        </app-cover>
+      </ng-template>
+    </app-swipper>
+  </div>
+  }
 </div>

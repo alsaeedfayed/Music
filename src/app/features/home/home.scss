@@ -1,0 +1,9 @@
+@import "abstract/mixins/mixins";
+.container {
+  @include flex-center;
+  flex-direction: column;
+
+  .tracks {
+    margin-top: 6rem;
+  }
+}

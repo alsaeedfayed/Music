@@ -38,8 +38,7 @@ export class SwipperCmp implements AfterViewInit, OnDestroy {
       effect(() => {
         const items = this.data();
         if (items.length > 0) {
-          console.log('Data changed:', this.data()[0]);
-          setTimeout(() => this.initSwiper(), 1000);
+          this.initSwiper();
         }
       });
     }
@@ -47,7 +46,7 @@ export class SwipperCmp implements AfterViewInit, OnDestroy {
   ngAfterViewInit() {}
 
   private initSwiper() {
-    if (this.swiperInstance) {
+    if (isPlatformBrowser(this.platformId) && this.swiperInstance) {
       this.swiperInstance.destroy(true, true);
     }
 
@@ -68,6 +67,9 @@ export class SwipperCmp implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.swiperInstance?.destroy(true, true);
+    if (isPlatformBrowser(this.platformId) && this.swiperInstance) {
+      this.swiperInstance.destroy(true, true);
+    }
+    this.swiperInstance = undefined;
   }
 }

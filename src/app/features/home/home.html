@@ -6,33 +6,23 @@
         <p class="text-primary fs-3 fw-medium">Fresh picks of the week</p>
       </div>
     </div>
-    <!-- Swiper container -->
-    <div class="swiper albums-swiper">
-      <div class="swiper-wrapper">
-        @for (album of albums(); track $index) {
-        <div class="swiper-slide">
-          <app-cover
-            [coverData]="album"
-            (menuAction)="onMenuAction($event, album)"
-          >
-            <!-- Custom actions injected via ng-content -->
-            <li customAction (click)="onCustomAction('download', album)">
-              <div class="context-menu__card--item">
-                <i class="bx bx-download"></i>
-                <span>Download</span>
-              </div>
-            </li>
-          </app-cover>
-        </div>
-        }
-      </div>
-
-      <!-- Optional navigation -->
-      <div class="swiper-button-next"></div>
-      <div class="swiper-button-prev"></div>
-
-      <!-- Optional pagination -->
-      <div class="swiper-pagination"></div>
-    </div>
+    <!-- ALBUMS -->
+    @if (albums().length > 0) {
+    <app-swipper [data]="albums" class="albums-swiper">
+      <ng-template let-album>
+        <app-cover
+          [coverData]="album"
+          (menuAction)="onMenuAction($event, album)"
+        >
+          <li customAction (click)="onCustomAction('download', album)">
+            <div class="context-menu__card--item">
+              <i class="bx bx-download"></i>
+              <span>Download</span>
+            </div>
+          </li>
+        </app-cover>
+      </ng-template>
+    </app-swipper>
+    }
   </div>
 </div>

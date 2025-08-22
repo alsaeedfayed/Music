@@ -11,28 +11,16 @@ import {
 import { Explore } from './services/explore';
 import { Cover } from '@app/components/cover/cover';
 import { forkJoin, Subject, takeUntil } from 'rxjs';
-import {
-  ALBUM_DATA,
-  ALBUMS,
-  NEW_TRACKS,
-  POD_CASTS,
-} from './models/explore.model';
+import { ALBUM_DATA, NEW_TRACKS, POD_CASTS } from './models/explore.model';
 import { Cover_Model } from '@app/components/cover/models/cover.model';
-
 // Swiper imports
 import Swiper from 'swiper';
-import { Navigation, Pagination } from 'swiper/modules';
-import { register } from 'swiper/element/bundle';
-import { isPlatformBrowser } from '@angular/common';
-
-// Register Swiper web components globally
-register();
-Swiper.use([Navigation, Pagination]);
+import { SwipperCmp } from '@app/components/swipper/swipper';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [Cover],
+  imports: [Cover, SwipperCmp],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })
@@ -46,8 +34,6 @@ export class Home implements OnInit, AfterViewInit, OnDestroy {
 
   private $destroy = new Subject<void>();
   private exploreService = inject(Explore);
-  private swiperInstance?: Swiper;
-  private platformId = inject(PLATFORM_ID);
 
   constructor() {}
 
@@ -69,11 +55,6 @@ export class Home implements OnInit, AfterViewInit, OnDestroy {
               })
             );
             this.albums.set(albumsCover);
-
-            // Initialize Swiper after DOM is rendered
-            if (isPlatformBrowser(this.platformId)) {
-              setTimeout(() => this.initSwiper(), 100);
-            }
           }
 
           this.tracks.set(res.tracks);
@@ -85,31 +66,7 @@ export class Home implements OnInit, AfterViewInit, OnDestroy {
       });
   }
 
-  ngAfterViewInit(): void {
-    // Don't init Swiper here — data might not be ready
-  }
-
-  private initSwiper() {
-    if (!isPlatformBrowser(this.platformId)) return;
-
-    if (this.swiperInstance) {
-      this.swiperInstance.destroy(true, true);
-    }
-
-    this.swiperInstance = new Swiper('.albums-swiper', {
-      spaceBetween: 10,
-      breakpoints: {
-        768: { slidesPerView: 2 },
-        1024: { slidesPerView: 3 },
-        1400: { slidesPerView: 4 },
-        1600: { slidesPerView: 5 },
-      },
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
-    });
-  }
+  ngAfterViewInit(): void {}
 
   onCustomAction(
     action: string,
@@ -128,10 +85,5 @@ export class Home implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
     this.$destroy.next();
     this.$destroy.complete();
-
-    // Clean up Swiper instance
-    if (this.swiperInstance) {
-      this.swiperInstance.destroy(true, true);
-    }
   }
 }

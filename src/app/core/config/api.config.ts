@@ -11,4 +11,7 @@ export class API_CONFIG {
     // ARTIST_DETAILS: 'artist/{id}',
     // ALBUM_DETAILS: 'album/{id}',
   };
+  static SOUNDS = {
+    ALBUM_TRACKS: (id: number | string) => `${this.BASE}/album/${id}/tracks`,
+  };
 }

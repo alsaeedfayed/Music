@@ -28,6 +28,7 @@ export class Cover<T> {
   onAddToFavourites(coverData: Play_List<T>): void {}
   onPlayList(coverData: Play_List<T>): void {
     this.play.playList(coverData);
+    console.log(coverData.type?.());
   }
 
   pause() {

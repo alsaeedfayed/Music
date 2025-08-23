@@ -26,7 +26,7 @@ export interface SONG {
   type: string;
 }
 
-export interface TRACKS {
+export interface ALBUM {
   data: SONG[];
   total: number;
 }

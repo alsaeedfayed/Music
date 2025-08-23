@@ -1,15 +1,15 @@
 import { Injectable, inject } from '@angular/core';
 import { Store } from '../store/store';
-import { TracksService } from '@app/features/tracks-cmp/services/tracks-service';
+import { AlbumService } from '@app/features/albums-cmp/services/tracks-service';
 import { SOUND_TYPE } from '@app/core/enums/core.enums';
 import { Play_List } from '@app/components/cover/models/cover.model';
-import { SONG, TRACKS } from '@app/features/tracks-cmp/models/tracks.model';
+import { SONG } from '@app/features/albums-cmp/models/tracks.model';
 import { Player } from '@app/core/classes/player.class';
 
 @Injectable({ providedIn: 'root' })
 export class Play {
   private store = inject(Store);
-  private tracksService = inject(TracksService);
+  private tracksService = inject(AlbumService);
 
   private player = new Player(() => this.onTrackEnded());
 
@@ -17,7 +17,7 @@ export class Play {
     this.store.currentPlayList.set(list);
     switch (list.type?.()) {
       case SOUND_TYPE.ALBUM:
-        this.tracksService.Get_Album_Tracks(list.id?.()!).subscribe((res) => {
+        this.tracksService.Get_Album(list.id?.()!).subscribe((res) => {
           const tracks = res.data;
           this.store.playList.set(tracks);
           this.playSong(tracks[0]);

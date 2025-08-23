@@ -17,7 +17,7 @@ export class Player {
     this.audio?.pause();
   }
 
-  resume(): void {
+  public resume(): void {
     if (this.audio && this.audio.paused) {
       this.audio.play();
     }

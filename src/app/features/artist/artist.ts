@@ -23,7 +23,7 @@ export class Artist implements OnInit {
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformID)) {
       const artistData = window.history.state?.artistData;
-      console.log('Received artistData:', artistData);
+      this.artist.set(artistData);
     }
   }
 }

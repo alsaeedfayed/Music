@@ -23,9 +23,7 @@ import Swiper from 'swiper';
 import { SwipperCmp } from '@app/components/swipper/swipper';
 import { sign } from 'node:crypto';
 import { WritableSignal } from '@angular/core';
-import { Store } from '@app/core/services/store/store';
 import { Caching } from '@app/core/services/caching/caching';
-import { Play } from '@app/core/services/play/play';
 import { AlbumService } from '../albums-cmp/services/tracks-service';
 import { ACTIONS } from '@app/core/enums/core.enums';
 import { Router } from '@angular/router';
@@ -50,10 +48,8 @@ export class Home implements OnInit, AfterViewInit, OnDestroy {
 
   private $destroy = new Subject<void>();
   private exploreService = inject(Explore);
-  private store = inject(Store);
   private albumService = inject(AlbumService);
   private cacheService = inject(Caching);
-  private playService = inject(Play);
   private trackId: WritableSignal<string | number> = signal('');
   private router = inject(Router);
 

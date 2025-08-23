@@ -23,3 +23,22 @@ export interface Album_Model {
   tracklist: string;
   type: string;
 }
+
+export interface Song_Model {
+  id: number;
+  title: string;
+  title_short: string;
+  title_version: string;
+  link: string;
+  duration: number;
+  rank: number;
+  explicit_lyrics: boolean;
+  explicit_content_lyrics: number;
+  explicit_content_cover: number;
+  preview: string;
+  md5_image: string;
+  position: number;
+  artist: Artist_Model;
+  album: Album_Model;
+  type: string;
+}

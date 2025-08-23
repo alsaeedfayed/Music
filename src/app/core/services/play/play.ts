@@ -14,10 +14,10 @@ export class Play {
   private player = new Player(() => this.onTrackEnded());
 
   playList(list: Play_List<any>): void {
-    this.store.currentPlayList.set(list);
     switch (list.type?.()) {
       case SOUND_TYPE.ALBUM:
         this.tracksService.Get_Album(list.id?.()!).subscribe((res) => {
+          this.store.currentPlayList.set(list);
           const tracks = res.data;
           this.store.playList.set(tracks);
           this.playSong(tracks[0]);
@@ -25,9 +25,14 @@ export class Play {
         break;
       case SOUND_TYPE.TRACK:
         // handle single track
+        this.store.currentPlayList.set(list);
+
         this.store.playList.set([]);
         if (list.rawData) this.playSong(list.rawData);
         break;
+      case SOUND_TYPE.PODCAST:
+      //handle pod cast
+
       default:
         break;
     }

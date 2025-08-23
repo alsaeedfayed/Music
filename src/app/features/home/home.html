@@ -12,7 +12,7 @@
       <ng-template let-album>
         <app-cover
           [coverData]="album"
-          (menuAction)="onMenuAction($event, album)"
+          (menuAction)="onMenuActionAlbum($event, album)"
         >
           <li customAction (click)="onCustomAction('download', album)">
             <div class="context-menu__card--item">
@@ -39,7 +39,7 @@
       <ng-template let-track>
         <app-cover
           [coverData]="track"
-          (menuAction)="onMenuAction($event, track)"
+          (menuAction)="onMenuActionTracks($event, track)"
         >
           <li customAction (click)="onCustomAction('download', track)">
             <div class="context-menu__card--item">
@@ -66,7 +66,7 @@
       <ng-template let-podcast>
         <app-cover
           [coverData]="podcast"
-          (menuAction)="onMenuAction($event, podcast)"
+          (menuAction)="onMenuActionPodcasts($event, podcast)"
         >
           <li customAction (click)="onCustomAction('download', podcast)">
             <div class="context-menu__card--item">

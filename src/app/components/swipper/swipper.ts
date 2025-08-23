@@ -46,9 +46,9 @@ export class SwipperCmp implements AfterViewInit, OnDestroy {
   ngAfterViewInit() {}
 
   private initSwiper() {
-    if (isPlatformBrowser(this.platformId) && this.swiperInstance) {
-      this.swiperInstance.destroy(true, true);
-    }
+    // if (isPlatformBrowser(this.platformId) && this.swiperInstance) {
+    //   this.swiperInstance.destroy(true, true);
+    // }
 
     this.swiperInstance = new Swiper('.swiper', {
       spaceBetween: 0,
@@ -75,7 +75,7 @@ export class SwipperCmp implements AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     if (isPlatformBrowser(this.platformId) && this.swiperInstance) {
-      this.swiperInstance.destroy(true, true);
+      // this.swiperInstance.destroy(true, true);
     }
     this.swiperInstance = undefined;
   }

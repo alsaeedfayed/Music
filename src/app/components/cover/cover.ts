@@ -22,6 +22,7 @@ import { Play } from '@app/core/services/play/play';
 export class Cover<T> {
   //cover data
   @Input() coverData: WritableSignal<Play_List<T>> = signal({} as Play_List<T>);
+  @Output() menuAction: EventEmitter<any> = new EventEmitter();
   //store
   store = inject(Store);
   play = inject(Play);
@@ -36,5 +37,6 @@ export class Cover<T> {
   }
   onMenuAction(e: string, coverData: Play_List<T>): void {
     // Handle context menu actions
+    this.menuAction.emit(e);
   }
 }

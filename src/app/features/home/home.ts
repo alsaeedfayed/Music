@@ -14,7 +14,6 @@ import { forkJoin, Subject, takeUntil } from 'rxjs';
 import {
   ALBUM_DATA,
   NEW_TRACKS,
-  POD_CAST_DATA,
   POD_CASTS,
   TRACKS_DATA,
 } from './models/explore.model';
@@ -28,6 +27,9 @@ import { Store } from '@app/core/services/store/store';
 import { Caching } from '@app/core/services/caching/caching';
 import { Play } from '@app/core/services/play/play';
 import { AlbumService } from '../albums-cmp/services/tracks-service';
+import { ACTIONS } from '@app/core/enums/core.enums';
+import { Router } from '@angular/router';
+import { POD_CAST_DATA } from './models/explore.model';
 
 @Component({
   selector: 'app-home',
@@ -53,6 +55,7 @@ export class Home implements OnInit, AfterViewInit, OnDestroy {
   private cacheService = inject(Caching);
   private playService = inject(Play);
   private trackId: WritableSignal<string | number> = signal('');
+  private router = inject(Router);
 
   constructor() {}
 
@@ -127,11 +130,47 @@ export class Home implements OnInit, AfterViewInit, OnDestroy {
     console.log('Custom Action:', action, albumSignal());
   }
 
-  onMenuAction(
-    event: Event,
-    albumSignal: WritableSignal<Play_List<ALBUM_DATA>>
+  onMenuActionAlbum(
+    action: string,
+    data: WritableSignal<Play_List<ALBUM_DATA>>
   ) {
-    console.log('Menu Action:', event, albumSignal());
+    switch (action) {
+      case ACTIONS.SHARE:
+        break;
+      case ACTIONS.ARTIST:
+        this.router.navigate(['/artist', data().rawData?.artist.name], {
+          state: {
+            artistData: data().rawData?.artist,
+          },
+        });
+        break;
+    }
+  }
+
+  onMenuActionTracks(
+    action: string,
+    data: WritableSignal<Play_List<TRACKS_DATA>>
+  ) {
+    switch (action) {
+      case ACTIONS.SHARE:
+        break;
+      case ACTIONS.ARTIST:
+        console.log(data().rawData);
+        break;
+    }
+  }
+
+  onMenuActionPodcasts(
+    action: string,
+    data: WritableSignal<Play_List<POD_CAST_DATA>>
+  ) {
+    switch (action) {
+      case ACTIONS.SHARE:
+        break;
+      case ACTIONS.ARTIST:
+        console.log(data().rawData);
+        break;
+    }
   }
 
   ngOnDestroy(): void {

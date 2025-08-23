@@ -1,3 +1,5 @@
+import { Album_Model, Artist_Model } from '@app/core/models/core.models';
+
 export interface ALBUMS {
   data?: ALBUM_DATA[] | null;
   total?: number;
@@ -16,7 +18,7 @@ export interface ALBUM_DATA {
   tracklist: string;
   explicit_lyrics: boolean;
   position: number;
-  artist: Artist;
+  artist: Artist_Model;
   type: string;
 }
 export interface NEW_TRACKS {
@@ -37,8 +39,8 @@ export interface TRACKS_DATA {
   preview: string;
   md5_image: string;
   position: number;
-  artist: Artist;
-  album: Album;
+  artist: Artist_Model;
+  album: Album_Model;
   type: string;
 }
 
@@ -59,30 +61,5 @@ export interface POD_CAST_DATA {
   picture_medium: string;
   picture_big: string;
   picture_xl: string;
-  type: string;
-}
-export interface Artist {
-  id: number;
-  name: string;
-  link: string;
-  picture: string;
-  picture_small: string;
-  picture_medium: string;
-  picture_big: string;
-  picture_xl: string;
-  radio: boolean;
-  tracklist: string;
-  type: string;
-}
-export interface Album {
-  id: number;
-  title: string;
-  cover: string;
-  cover_small: string;
-  cover_medium: string;
-  cover_big: string;
-  cover_xl: string;
-  md5_image: string;
-  tracklist: string;
   type: string;
 }

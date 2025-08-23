@@ -4,3 +4,11 @@ export enum SOUND_TYPE {
   PODCAST = 'podcast',
   SONG = 'song',
 }
+
+export enum ACTIONS {
+  SHARE = 'share',
+  ARTIST = 'artist',
+  DOWNLOAD = 'download',
+  ALBUM = 'album',
+  FAVOURITE = 'favourite',
+}

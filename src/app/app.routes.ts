@@ -10,4 +10,12 @@ export const routes: Routes = [
     path: 'explore',
     loadComponent: () => import('@features/home/home').then((m) => m.Home),
   },
+  {
+    path: 'artist/:name',
+    loadComponent: () =>
+      import('@features/artist/artist').then((m) => m.Artist),
+    data: {
+      title: 'artist page',
+    },
+  },
 ];

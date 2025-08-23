@@ -1,34 +1,32 @@
-import { Signal, signal, WritableSignal } from '@angular/core';
-
 export interface ARTIST {
-  id: Signal<number>;
-  name: WritableSignal<string>;
-  tracklist: WritableSignal<string>;
-  type: WritableSignal<string>;
+  id: number;
+  name: string;
+  tracklist: string;
+  type: string;
 }
 
-export interface TRACKS_DATA {
-  id: Signal<number>;
-  readable: WritableSignal<boolean>;
-  title: WritableSignal<string>;
-  title_short: WritableSignal<string>;
-  title_version: WritableSignal<string>;
-  isrc: WritableSignal<string>;
-  link: WritableSignal<string>;
-  duration: WritableSignal<number>;
-  track_position: WritableSignal<number>;
-  disk_number: WritableSignal<number>;
-  rank: WritableSignal<number>;
-  explicit_lyrics: WritableSignal<boolean>;
-  explicit_content_lyrics: WritableSignal<number>;
-  explicit_content_cover: WritableSignal<number>;
-  preview: WritableSignal<string>;
-  md5_image: WritableSignal<string>;
+export interface SONG {
+  id: number;
+  readable: boolean;
+  title: string;
+  title_short: string;
+  title_version: string;
+  isrc: string;
+  link: string;
+  duration: number;
+  track_position: number;
+  disk_number: number;
+  rank: number;
+  explicit_lyrics: boolean;
+  explicit_content_lyrics: number;
+  explicit_content_cover: number;
+  preview: string;
+  md5_image: string;
   artist: ARTIST;
-  type: WritableSignal<string>;
+  type: string;
 }
 
 export interface TRACKS {
-  data: WritableSignal<TRACKS_DATA[]>;
-  total: WritableSignal<number>;
+  data: SONG[];
+  total: number;
 }

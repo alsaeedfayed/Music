@@ -1,10 +1,19 @@
 @if (coverData()) {
-<div class="card">
+<div
+  class="card"
+  [class.hoverCard]="
+    store.isPlaying() && coverData().id === store.currentCover().id
+  "
+>
   <img [src]="coverData().coverUrl?.()" alt="Card image" class="card-image" />
   <!-- ICONS -->
   <div class="card-icons">
     <i (click)="onAddToFavourites(coverData())" class="bx bx-heart"></i>
-    <i (click)="onPlay(coverData())" class="bx bx-play"></i>
+    @if (store.isPlaying() && store.currentCover()?.id === coverData().id) {
+    <i (click)="pause()">
+      <span class="audio-waves"> <span></span><span></span><span></span> </span>
+    </i>
+    } @else {<i (click)="onPlay(coverData())" class="bx bx-play"></i>}
     <!-- Menu Component -->
     <i>
       <app-context-menu (menuAction)="onMenuAction($event, coverData())">

@@ -5,8 +5,8 @@ import {
   OnInit,
   inject,
   signal,
-  WritableSignal,
   PLATFORM_ID,
+  effect,
 } from '@angular/core';
 import { Explore } from './services/explore';
 import { Cover } from '@app/components/cover/cover';
@@ -23,6 +23,12 @@ import { Cover_Model } from '@app/components/cover/models/cover.model';
 import Swiper from 'swiper';
 import { SwipperCmp } from '@app/components/swipper/swipper';
 import { sign } from 'node:crypto';
+import { WritableSignal } from '@angular/core';
+import { Store } from '@app/core/services/store/store';
+import { TracksService } from '../tracks-cmp/services/tracks-service';
+import { TRACKS } from '../tracks-cmp/models/tracks.model';
+import { Caching } from '@app/core/services/caching/caching';
+import { Play } from '@app/core/services/play/play';
 
 @Component({
   selector: 'app-home',
@@ -46,6 +52,11 @@ export class Home implements OnInit, AfterViewInit, OnDestroy {
 
   private $destroy = new Subject<void>();
   private exploreService = inject(Explore);
+  private store = inject(Store);
+  private tracksService = inject(TracksService);
+  private cacheService = inject(Caching);
+  private playService = inject(Play);
+  private trackId: WritableSignal<string | number> = signal('');
 
   constructor() {}
 
@@ -61,6 +72,7 @@ export class Home implements OnInit, AfterViewInit, OnDestroy {
           if (res.albums?.data?.length) {
             const albumsCover = res.albums.data.map((album) =>
               signal<Cover_Model<ALBUM_DATA>>({
+                id: signal(album.id),
                 coverUrl: signal(album.cover_medium),
                 rawData: album,
                 title: signal(album.title),
@@ -77,6 +89,7 @@ export class Home implements OnInit, AfterViewInit, OnDestroy {
           if (res.tracks?.data?.length) {
             const tracksCover = res.tracks.data.map((track) =>
               signal<Cover_Model<TRACKS_DATA>>({
+                id: signal(track.id),
                 coverUrl: signal(track.album.cover_medium),
                 title: signal(track.title),
                 type: signal(track.type),
@@ -92,6 +105,7 @@ export class Home implements OnInit, AfterViewInit, OnDestroy {
           if (res.podcasts?.data?.length) {
             const podcastCover = res.podcasts.data.map((podcast) =>
               signal<Cover_Model<POD_CAST_DATA>>({
+                id: signal(podcast.id),
                 coverUrl: signal(podcast.picture_medium),
                 title: signal(podcast.title),
                 type: signal(podcast.type),

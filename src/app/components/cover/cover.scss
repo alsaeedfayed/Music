@@ -42,7 +42,8 @@
     }
   }
 
-  &:hover {
+  &:hover,
+  &.hoverCard {
     .card-image {
       filter: blur(3px);
     }

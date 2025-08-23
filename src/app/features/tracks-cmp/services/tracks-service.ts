@@ -11,7 +11,7 @@ import { Caching } from '@app/core/services/caching/caching';
 export class TracksService {
   private http = inject(HttpClient);
   private cacheService = inject(Caching);
-  Get_Tracks(albumId: number | string): Observable<TRACKS> {
+  Get_Album_Tracks(albumId: number | string): Observable<TRACKS> {
     //if cached return cached observable
     const cached = this.cacheService.cache.get(albumId) as
       | Observable<TRACKS>

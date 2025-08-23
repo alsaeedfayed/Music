@@ -33,4 +33,6 @@ export class Player {
   isPlaying(): boolean {
     return this.audio != null && !this.audio.paused;
   }
+
+  endSong(): void {}
 }

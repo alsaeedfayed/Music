@@ -25,6 +25,8 @@ export class Play {
         break;
       case SOUND_TYPE.TRACK:
         // handle single track
+        this.store.playList.set([]);
+        if (list.rawData) this.playSong(list.rawData);
         break;
       default:
         break;
@@ -72,6 +74,14 @@ export class Play {
   }
 
   private onTrackEnded(): void {
-    this.next(); // auto play next
+    if (this.store.hasNext()) {
+      this.next(); // play next if available
+    } else {
+      // No next track → stop playing
+      this.store.isPlaying.set(false);
+      this.store.currentSong.set(null);
+      // optional: clear currentPlayList if you want
+      // this.store.currentPlayList.set({} as Play_List<any>);
+    }
   }
 }

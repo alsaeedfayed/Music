@@ -13,4 +13,5 @@ export class Play_List<T> {
   artistName?: Signal<string | number>;
   artistImg?: Signal<string>;
   artistType?: Signal<string>;
+  preview?: Signal<string>;
 }

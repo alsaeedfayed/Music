@@ -24,6 +24,7 @@ export interface SONG {
   md5_image: string;
   artist: ARTIST;
   type: string;
+  album: any;
 }
 
 export interface ALBUM {

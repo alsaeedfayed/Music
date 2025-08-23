@@ -7,7 +7,7 @@ import {
   signal,
   WritableSignal,
 } from '@angular/core';
-import { Cover_Model } from './models/cover.model';
+import { Play_List } from './models/cover.model';
 import { ContextMenu } from '../context-menu/context-menu';
 import { Store } from '@app/core/services/store/store';
 import { SOUND_TYPE } from '@app/core/enums/core.enums';
@@ -21,32 +21,20 @@ import { Play } from '@app/core/services/play/play';
 })
 export class Cover<T> {
   //cover data
-  @Input() coverData: WritableSignal<Cover_Model<T>> = signal(
-    {} as Cover_Model<T>
-  );
+  @Input() coverData: WritableSignal<Play_List<T>> = signal({} as Play_List<T>);
   //store
   store = inject(Store);
   play = inject(Play);
-  onAddToFavourites(coverData: Cover_Model<T>): void {}
-  onPlay(coverData: Cover_Model<T>): void {
-    const currenCover: Cover_Model<T> = this.store.currentCover();
-    if (currenCover) {
-      if (coverData.id === currenCover.id) {
-        this.play.resume();
-      } else {
-        this.store.currentCover.set(coverData);
-      }
-    } else {
-      this.store.currentCover.set(coverData);
-    }
-    // console.log(this.store.currentCover());
+  onAddToFavourites(coverData: Play_List<T>): void {}
+  onPlay(coverData: Play_List<T>): void {
+    this.play.playList(coverData);
+    console.log(coverData);
   }
 
   pause() {
-    this.store.isPlaying.set(false);
     this.play.pause();
   }
-  onMenuAction(e: string, coverData: Cover_Model<T>): void {
+  onMenuAction(e: string, coverData: Play_List<T>): void {
     // Handle context menu actions
   }
 }

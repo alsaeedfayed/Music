@@ -1,116 +1,77 @@
-import {
-  effect,
-  inject,
-  Injectable,
-  PLATFORM_ID,
-  WritableSignal,
-} from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Store } from '../store/store';
-import { isPlatformBrowser } from '@angular/common';
-import { Cover_Model } from '@app/components/cover/models/cover.model';
-import { SOUND_TYPE } from '@app/core/enums/core.enums';
 import { TracksService } from '@app/features/tracks-cmp/services/tracks-service';
+import { SOUND_TYPE } from '@app/core/enums/core.enums';
+import { Play_List } from '@app/components/cover/models/cover.model';
 import { SONG, TRACKS } from '@app/features/tracks-cmp/models/tracks.model';
+import { Player } from '@app/core/classes/player.class';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class Play {
-  private platformId = inject(PLATFORM_ID);
+  private store = inject(Store);
   private tracksService = inject(TracksService);
-  constructor() {
-    effect(() => {
-      //handle playing  tracks , ... regarding cover
-      const coverData: Cover_Model<any> = this.store.currentCover();
-      if (coverData) {
-        const id = coverData.id?.();
-        if (id) {
-          this.store.isPlaying.set(true);
-          switch (coverData.type?.()) {
-            case SOUND_TYPE.ALBUM:
-              this.tracksService.Get_Album_Tracks(id).subscribe({
-                next: (res: TRACKS) => {
-                  this.store.currentTrack.set(res.data);
-                  this.store.currentSong.set(res.data[0]);
-                  const song: SONG = this.store.currentSong();
-                  this.play(song);
-                },
-              });
-              break;
-            case SOUND_TYPE.TRACK:
-              break;
-            case SOUND_TYPE.PODCAST:
-              break;
-            case SOUND_TYPE.SONG:
-              break;
-            default:
-              console.log('');
-          }
-        }
-      }
-    });
-  }
-  audio: any;
-  store = inject(Store);
 
-  play(Song: SONG): void {
-    if (!isPlatformBrowser(this.platformId)) return;
-    if (Song) {
-      // Stop any existing audio first
-      if (this.audio) {
-        this.audio.pause();
-        this.audio.currentTime = 0;
-      }
+  private player = new Player(() => this.onTrackEnded());
 
-      // Start new audio
-      this.audio = new Audio(Song.preview);
-      this.audio.load();
-      this.audio.play();
-      this.audio.onended = () => {
-        this.store.isPlaying.set(false);
-        this.store.currentSong.set(null);
-        this.store.currentCover.set(null);
-        this.store.currentTrack.set(null);
-      };
+  playList(list: Play_List<any>): void {
+    this.store.currentPlayList.set(list);
+    switch (list.type?.()) {
+      case SOUND_TYPE.ALBUM:
+        this.tracksService.Get_Album_Tracks(list.id?.()!).subscribe((res) => {
+          const tracks = res.data;
+          this.store.playList.set(tracks);
+          this.playSong(tracks[0]);
+        });
+        break;
+      case SOUND_TYPE.TRACK:
+        // handle single track
+        break;
+      default:
+        break;
     }
   }
 
-  pause() {
-    this.audio.pause();
+  playSong(song: SONG): void {
+    const current = this.store.currentSong();
+    // Same song toggle pause/resume
+    if (current && current.id === song.id) {
+      this.store.isPlaying() ? this.pause() : this.resume();
+      return;
+    }
+
+    // New song
+    this.store.currentSong.set(song);
+    this.store.isPlaying.set(true);
+    this.player.play(song.preview);
+  }
+
+  pause(): void {
+    this.player.pause();
     this.store.isPlaying.set(false);
   }
 
   resume(): void {
-    if (this.audio && this.audio.paused) {
-      this.audio.play();
-      this.store.isPlaying.set(true);
+    this.player.resume();
+    this.store.isPlaying.set(true);
+  }
+
+  next(): void {
+    const idx = this.store.currentIndex();
+    if (this.store.hasNext()) {
+      const nextSong = this.store.playList()[idx + 1];
+      this.playSong(nextSong);
     }
   }
 
-  // togglePlayPause() {
-  //   this.store.isPlaying() ? this.pause() : this.play();
-  // }
+  prev(): void {
+    const idx = this.store.currentIndex();
+    if (this.store.hasPrev()) {
+      const prevSong = this.store.playList()[idx - 1];
+      this.playSong(prevSong);
+    }
+  }
 
-  // next() {
-  //   const idx = this.store.currentIndex();
-  //   if (this.store.hasNext()) {
-  //     this.store.currentTrack.set(this.store.playlist()[idx + 1]);
-  //   }
-  // }
-
-  // prev() {
-  //   const idx = this.store.currentIndex();
-  //   if (this.store.hasPrev()) {
-  //     this.store.currentTrack.set(this.store.playlist()[idx - 1]);
-  //   }
-  // }
-
-  // toggleFavorite(track: any) {
-  //   const favs = this.store.favorites();
-  //   if (favs.some((f) => f.id === track.id)) {
-  //     this.store.favorites.set(favs.filter((f) => f.id !== track.id));
-  //   } else {
-  //     this.store.favorites.set([...favs, track]);
-  //   }
-  // }
+  private onTrackEnded(): void {
+    this.next(); // auto play next
+  }
 }

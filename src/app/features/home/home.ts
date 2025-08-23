@@ -18,7 +18,7 @@ import {
   POD_CASTS,
   TRACKS_DATA,
 } from './models/explore.model';
-import { Cover_Model } from '@app/components/cover/models/cover.model';
+import { Play_List } from '@app/components/cover/models/cover.model';
 // Swiper imports
 import Swiper from 'swiper';
 import { SwipperCmp } from '@app/components/swipper/swipper';
@@ -39,16 +39,13 @@ import { Play } from '@app/core/services/play/play';
 })
 export class Home implements OnInit, AfterViewInit, OnDestroy {
   // Signals for data
-  albums: WritableSignal<WritableSignal<Cover_Model<ALBUM_DATA>>[]> = signal(
+  albums: WritableSignal<WritableSignal<Play_List<ALBUM_DATA>>[]> = signal([]);
+
+  tracks: WritableSignal<WritableSignal<Play_List<TRACKS_DATA>>[]> = signal([]);
+
+  podcasts: WritableSignal<WritableSignal<Play_List<POD_CAST_DATA>>[]> = signal(
     []
   );
-
-  tracks: WritableSignal<WritableSignal<Cover_Model<TRACKS_DATA>>[]> = signal(
-    []
-  );
-
-  podcasts: WritableSignal<WritableSignal<Cover_Model<POD_CAST_DATA>>[]> =
-    signal([]);
 
   private $destroy = new Subject<void>();
   private exploreService = inject(Explore);
@@ -71,7 +68,7 @@ export class Home implements OnInit, AfterViewInit, OnDestroy {
         next: (res) => {
           if (res.albums?.data?.length) {
             const albumsCover = res.albums.data.map((album) =>
-              signal<Cover_Model<ALBUM_DATA>>({
+              signal<Play_List<ALBUM_DATA>>({
                 id: signal(album.id),
                 coverUrl: signal(album.cover_medium),
                 rawData: album,
@@ -88,7 +85,7 @@ export class Home implements OnInit, AfterViewInit, OnDestroy {
 
           if (res.tracks?.data?.length) {
             const tracksCover = res.tracks.data.map((track) =>
-              signal<Cover_Model<TRACKS_DATA>>({
+              signal<Play_List<TRACKS_DATA>>({
                 id: signal(track.id),
                 coverUrl: signal(track.album.cover_medium),
                 title: signal(track.title),
@@ -104,7 +101,7 @@ export class Home implements OnInit, AfterViewInit, OnDestroy {
 
           if (res.podcasts?.data?.length) {
             const podcastCover = res.podcasts.data.map((podcast) =>
-              signal<Cover_Model<POD_CAST_DATA>>({
+              signal<Play_List<POD_CAST_DATA>>({
                 id: signal(podcast.id),
                 coverUrl: signal(podcast.picture_medium),
                 title: signal(podcast.title),
@@ -126,14 +123,14 @@ export class Home implements OnInit, AfterViewInit, OnDestroy {
 
   onCustomAction(
     action: string,
-    albumSignal: WritableSignal<Cover_Model<ALBUM_DATA>>
+    albumSignal: WritableSignal<Play_List<ALBUM_DATA>>
   ) {
     console.log('Custom Action:', action, albumSignal());
   }
 
   onMenuAction(
     event: Event,
-    albumSignal: WritableSignal<Cover_Model<ALBUM_DATA>>
+    albumSignal: WritableSignal<Play_List<ALBUM_DATA>>
   ) {
     console.log('Menu Action:', event, albumSignal());
   }

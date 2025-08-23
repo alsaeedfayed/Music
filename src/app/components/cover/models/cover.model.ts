@@ -1,5 +1,5 @@
 import { Signal, signal, WritableSignal } from '@angular/core';
-export class Cover_Model<T> {
+export class Play_List<T> {
   id?: WritableSignal<string | number>;
   coverUrl?: Signal<string>;
   title?: Signal<string>;

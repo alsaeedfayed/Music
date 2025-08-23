@@ -26,9 +26,8 @@ export class Cover<T> {
   store = inject(Store);
   play = inject(Play);
   onAddToFavourites(coverData: Play_List<T>): void {}
-  onPlay(coverData: Play_List<T>): void {
+  onPlayList(coverData: Play_List<T>): void {
     this.play.playList(coverData);
-    console.log(coverData);
   }
 
   pause() {

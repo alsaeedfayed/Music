@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Output, signal } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  signal,
+  WritableSignal,
+} from '@angular/core';
 
 @Component({
   selector: 'app-context-menu',
@@ -8,7 +15,7 @@ import { Component, EventEmitter, Output, signal } from '@angular/core';
 })
 export class ContextMenu {
   isOpen = signal(false);
-
+  @Input() useDefault: boolean = false;
   @Output() menuAction = new EventEmitter<string>();
   // actions = [
   //   { label: 'Play', value: 'play' },

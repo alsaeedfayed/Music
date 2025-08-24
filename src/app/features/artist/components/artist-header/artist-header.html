@@ -1,5 +1,58 @@
-<div class="header d-flex justify-content-between align-items-start">
-  <div class="header__profile">
-    <div class="d-flex gap-3 align-items-center"></div>
+<div class="artistheader d-flex justify-content-between align-items-start">
+  <div class="artistheader__profile">
+    <img
+      class="object-fit-contain"
+      [src]="artist()?.picture_medium"
+      alt="artist image"
+    />
+    <div class="d-flex flex-column gap-2">
+      <p class="fs-1 fw-bold">{{ artist()?.name }}</p>
+      <span class="text-secondary"> {{ artist()?.id }} Fans </span>
+    </div>
   </div>
+  <div class="d-none d-sm-flex gap-4">
+    <i class="fs-1 bx bxl-facebook text-bg-primary"></i>
+    <i class="fs-1 bx bxl-twitter text-bg-info text-white"></i>
+  </div>
+</div>
+
+<div class="artistheader__actions mt-5 d-flex gap-5 align-items-center">
+  <button class="btn-primary d-flex align-items-center">
+    <i class="bx bx-play fs-1"></i> <span>mix</span>
+  </button>
+  <a><i class="bx bx-heart fs-1 icon"></i></a>
+  <span
+    ><app-context-menu [useDefault]="false">
+      <li>
+        <div class="context-menu__card--item">
+          <i class="bx bx-play fs-2"></i>
+          <span>play mix</span>
+        </div>
+      </li>
+      <li>
+        <div class="context-menu__card--item">
+          <i class="bx bx-heart fs-2"></i>
+          <span>add to my favourites</span>
+        </div>
+      </li>
+      <li>
+        <div class="context-menu__card--item">
+          <i class="bx bx-share fs-2"></i>
+          <span>share</span>
+        </div>
+      </li>
+      <li>
+        <div class="context-menu__card--item">
+          <i class="bx bx-block fs-2"></i>
+          <span>dont recommend this artist</span>
+        </div>
+      </li>
+      <li>
+        <div class="context-menu__card--item">
+          <i class="bx bx-message fs-2"></i>
+          <span>report a problem</span>
+        </div>
+      </li>
+    </app-context-menu></span
+  >
 </div>

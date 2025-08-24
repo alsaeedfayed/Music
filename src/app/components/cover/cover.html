@@ -18,7 +18,10 @@
     } @else {<i (click)="onPlayList(coverData())" class="bx bx-play"></i>}
     <!-- Menu Component -->
     <i>
-      <app-context-menu (menuAction)="onMenuAction($event, coverData())">
+      <app-context-menu
+        [useDefault]="true"
+        (menuAction)="onMenuAction($event, coverData())"
+      >
         <!-- Custom actions injected via ng-content -->
         <ng-content select="[customAction]"></ng-content>
       </app-context-menu>

@@ -8,15 +8,21 @@ import { Play_List } from '@app/components/cover/models/cover.model';
 })
 export class SongState extends BaseStore<Song_Model> {
   public isPlaying: WritableSignal<boolean> = signal(false);
-  public playList: WritableSignal<Song_Model[]> = signal([]);
+  public playList: WritableSignal<Song_Model[] | null> = signal(null);
   public currentCoverPlayList: WritableSignal<Play_List<any> | null> =
     signal(null);
 
-  currentIndex = computed(() => {
+  currentIndex = computed<number>(() => {
     const current = this.current();
-    return current ? this.playList().findIndex((s) => s.id === current.id) : -1;
+    return current
+      ? this.playList()?.findIndex((s) => s.id === current.id) ?? -1
+      : -1;
   });
 
-  hasNext = computed(() => this.currentIndex() < this.playList().length - 1);
+  hasNext = computed(() => {
+    const list = this.playList() ?? [];
+    return this.currentIndex() < list.length - 1;
+  });
+
   hasPrev = computed(() => this.currentIndex() > 0);
 }

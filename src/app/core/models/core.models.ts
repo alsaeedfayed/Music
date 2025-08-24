@@ -26,6 +26,7 @@ export interface Album_Model {
 
 export interface Song_Model {
   id: number;
+  readable: boolean;
   title: string;
   title_short: string;
   title_version: string;
@@ -36,9 +37,25 @@ export interface Song_Model {
   explicit_content_lyrics: number;
   explicit_content_cover: number;
   preview: string;
+  contributors?: Contributer_Model[] | null;
   md5_image: string;
-  position: number;
   artist: Artist_Model;
   album: Album_Model;
   type: string;
+}
+
+export interface Contributer_Model {
+  id: number;
+  name: string;
+  link: string;
+  share: string;
+  picture: string;
+  picture_small: string;
+  picture_medium: string;
+  picture_big: string;
+  picture_xl: string;
+  radio: boolean;
+  tracklist: string;
+  type: string;
+  role: string;
 }

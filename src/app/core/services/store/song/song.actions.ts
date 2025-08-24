@@ -12,7 +12,7 @@ import { SongState } from './song.state';
 export class SongActions extends SongState {
   private audioPlayer = new Player(() => this.onTrackEnded());
   private albums = inject(AlbumService);
-  setPlayList(list: Song_Model[]): void {
+  setPlayList(list: Song_Model[] | null): void {
     this.playList.set(list);
   }
   playSong(song: Song_Model | null): void {
@@ -69,16 +69,18 @@ export class SongActions extends SongState {
 
   next(): void {
     const idx = this.currentIndex();
+    const list = this.playList() ?? []; // default to empty array
     if (this.hasNext()) {
-      const nextSong = this.playList()[idx + 1];
-      this.playSong(nextSong);
+      const nextSong = list[idx + 1];
+      if (nextSong) this.playSong(nextSong);
     }
   }
 
   prev(): void {
     const idx = this.currentIndex();
     if (this.hasPrev()) {
-      const prevSong = this.playList()[idx - 1];
+      const list = this.playList() ?? []; // default to empty array
+      const prevSong = list[idx - 1];
       this.playSong(prevSong);
     }
   }

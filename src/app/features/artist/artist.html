@@ -2,4 +2,41 @@
   <div class="p-5">
     <app-artist-header (playMix)="onPlayMix()"></app-artist-header>
   </div>
+
+  <div class="track">
+    <app-table
+      [cols]="columns"
+      [isSelectable]="isSelectable"
+      [data]="songs"
+    ></app-table>
+  </div>
 </div>
+
+<!-- Templates for custom cells -->
+<ng-template #trackCell let-song>
+  <div class="flex items-center gap-2">
+    <!-- <img [src]="song.name" alt="cover" width="40" height="40" /> -->
+    <span>{{ song.name }}</span>
+  </div>
+</ng-template>
+
+<ng-template #albumCell let-song>
+  <div class="flex items-center gap-2">
+    <i class="bx bx-heart"></i>
+    <app-context-menu>
+      <button>⋮</button>
+      <ng-container menu>
+        <li (click)="viewAlbum(song.albumId)">Go to album</li>
+      </ng-container>
+    </app-context-menu>
+    <span>{{ song.album }}</span>
+  </div>
+</ng-template>
+
+<ng-template #timeCell let-song>
+  <span>{{ song.duration | date : "mm:ss" }}</span>
+</ng-template>
+
+<ng-template #actionCell let-song>
+  <button (click)="selectSong(song)">selecttt</button>
+</ng-template>

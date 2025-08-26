@@ -4,11 +4,12 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build:ssr": "ng build",
+    "serve:ssr": "node dist/Music/server/server.mjs",
+    "dev:ssr": "npm run build:ssr && npm run serve:ssr",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:Music": "node dist/Music/server/server.mjs",
-    "build:ssr": "ng build && ng run music:server"
+    "serve:ssr:Music": "node dist/Music/server/server.mjs"
   },
   "prettier": {
     "overrides": [

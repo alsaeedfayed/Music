@@ -62,6 +62,7 @@ export class Artist implements OnInit, AfterViewInit {
   }
 
   getArtistTopTracks(): void {
+    //refactor // this is not ssr .. need refactor
     if (this.artist().id) {
       this.artistService.Get_Artist_tracks(this.artist().id).subscribe({
         next: (res: Track_Api_Response) => {

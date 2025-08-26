@@ -1,22 +1,37 @@
-/* components/generic-table/generic-table.component.scss */
+/* generic-table.component.scss */
+.table-container {
+  width: 100%;
+  overflow-x: auto; // ✅ enables scrolling on mobile
+}
 
 .generic-table {
   width: 100%;
   border-collapse: collapse;
+  min-width: 600px; // ✅ force full width on small screens
 
   th,
   td {
     padding: 0.75rem;
     border-bottom: 1px solid #ddd;
     text-align: left;
+    white-space: nowrap; // ✅ prevent text wrap
   }
 
   thead {
-    background: var(--color-card, #f5f5f5);
+    background: var(--color-card);
   }
 
   tbody tr:hover {
-    background: rgba(0, 0, 0, 0.03);
+    background: linear-gradient(135deg, #a386e8, #ec4899);
+    cursor: pointer;
+    color: #fff;
+    transform: scaleY(1.1);
+  }
+  tbody {
+    transition: all 0.5s ease;
+  }
+  tbody td {
+    align-items: center;
   }
 
   input[type="checkbox"] {

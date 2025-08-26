@@ -1,61 +1,63 @@
 <!-- components/generic-table/generic-table.component.html -->
-<table class="generic-table">
-  <thead>
-    <tr>
-      @for (col of cols(); track $index) {
-      <th [class]="col.header" [style.width]="col.width">
-        {{ col.header }}
-      </th>
-      } @if (isSelectable) {
-      <th class="actionCheckBox">
-        <div class="d-flex gap-4">
-          @if (hasSelection()) {
-          <div class="actions">
-            <ng-content select="[actions]"></ng-content>
+<div class="table-container">
+  <table class="generic-table">
+    <thead>
+      <tr>
+        @for (col of cols(); track $index) {
+        <th [class]="col.header" [style.width]="col.width">
+          {{ col.header }}
+        </th>
+        } @if (isSelectable) {
+        <th class="actionCheckBox">
+          <div class="d-flex gap-4">
+            @if (hasSelection()) {
+            <div class="actions">
+              <ng-content select="[actions]"></ng-content>
+            </div>
+            }
+            <div>
+              <input
+                type="checkbox"
+                [checked]="isAllSelected()"
+                (change)="toggleSelectAll()"
+              />
+            </div>
           </div>
-          }
-          <div>
-            <input
-              type="checkbox"
-              [checked]="isAllSelected()"
-              (change)="toggleSelectAll()"
-            />
-          </div>
-        </div>
-      </th>
-      }
-    </tr>
-  </thead>
-
-  <tbody>
-    @for (row of data(); track $index) {
-    <tr>
-      <!-- Dynamic cells -->
-      @for (col of cols(); track $index) {
-      <td [class]="col.header + 'data'">
-        @if (col.cellTemplate) {
-        <ng-container>
-          <ng-container
-            *ngTemplateOutlet="col.cellTemplate; context: { $implicit: row }"
-          ></ng-container>
-        </ng-container>
-        } @else {
-        {{ row[col.key] }}
+        </th>
         }
-      </td>
-      }
+      </tr>
+    </thead>
 
-      <!-- Row select -->
-      @if (isSelectable) {
-      <td>
-        <input
-          type="checkbox"
-          [checked]="isRowSelected(row)"
-          (change)="toggleRow(row)"
-        />
-      </td>
+    <tbody>
+      @for (row of data(); track $index) {
+      <tr class="rowdata">
+        <!-- Dynamic cells -->
+        @for (col of cols(); track $index) {
+        <td [class]="col.header + 'data'">
+          @if (col.cellTemplate) {
+          <ng-container>
+            <ng-container
+              *ngTemplateOutlet="col.cellTemplate; context: { $implicit: row }"
+            ></ng-container>
+          </ng-container>
+          } @else {
+          {{ row[col.key] }}
+          }
+        </td>
+        }
+
+        <!-- Row select -->
+        @if (isSelectable) {
+        <td>
+          <input
+            type="checkbox"
+            [checked]="isRowSelected(row)"
+            (change)="toggleRow(row)"
+          />
+        </td>
+        }
+      </tr>
       }
-    </tr>
-    }
-  </tbody>
-</table>
+    </tbody>
+  </table>
+</div>

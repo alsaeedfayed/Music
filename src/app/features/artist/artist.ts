@@ -86,6 +86,10 @@ export class Artist implements OnInit, AfterViewInit {
     }
   }
 
+  playSong(song: Song_Model): void {
+    this.store.songs.playSong(song);
+  }
+
   viewAlbum(albumId: number) {
     console.log('Album', albumId);
   }

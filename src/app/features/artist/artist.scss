@@ -1,0 +1,17 @@
+.track-cell {
+  .imageicon {
+    position: relative;
+    .play-icon {
+      position: absolute;
+      top: 25%;
+      left: 20%;
+      border-radius: 50%;
+      background: var(--color-primary-gradient);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+  }
+  &:hover .imageicon .play-icon {
+    opacity: 1;
+  }
+}

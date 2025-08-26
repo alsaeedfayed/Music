@@ -1,1 +1,8 @@
 @use "design-system" as *;
+.rowdata {
+  &__track-cell {
+    .imageicon .play-icon :hover {
+      opacity: 1;
+    }
+  }
+}

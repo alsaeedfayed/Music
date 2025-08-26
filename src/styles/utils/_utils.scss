@@ -1,5 +1,4 @@
-@import "abstract/variables/typography";
-
+@use "abstract" as *;
 .container {
   width: 100% !important;
   padding: 3rem 3rem !important;

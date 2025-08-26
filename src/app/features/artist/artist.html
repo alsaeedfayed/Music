@@ -4,32 +4,25 @@
   </div>
 
   <div class="track">
-    <app-table
-      [cols]="columns"
-      [isSelectable]="isSelectable"
-      [data]="songs"
-    ></app-table>
+    <app-table [cols]="columns" [isSelectable]="isSelectable" [data]="songs">
+      <app-context-menu [useDefault]="true" actions></app-context-menu>
+    </app-table>
   </div>
 </div>
 
 <!-- Templates for custom cells -->
 <ng-template #trackCell let-song>
-  <div class="flex items-center gap-2">
-    <!-- <img [src]="song.name" alt="cover" width="40" height="40" /> -->
-    <span>{{ song.name }}</span>
+  <div class="d-flex items-center gap-4">
+    <img [src]="song.album.cover_small" alt="cover" width="40" height="40" />
+    <span>{{ song.title }}</span>
   </div>
 </ng-template>
 
 <ng-template #albumCell let-song>
-  <div class="flex items-center gap-2">
+  <div class="d-flex items-center gap-5">
     <i class="bx bx-heart"></i>
-    <app-context-menu>
-      <button>⋮</button>
-      <ng-container menu>
-        <li (click)="viewAlbum(song.albumId)">Go to album</li>
-      </ng-container>
-    </app-context-menu>
-    <span>{{ song.album }}</span>
+    <div><app-context-menu [useDefault]="true"> </app-context-menu></div>
+    <span>{{ song.album.title }}</span>
   </div>
 </ng-template>
 

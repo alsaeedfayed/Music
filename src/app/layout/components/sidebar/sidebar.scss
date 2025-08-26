@@ -1,6 +1,4 @@
-@import "abstract/mixins/mixins";
-@import "abstract/variables/colors";
-@import "abstract/variables/typography";
+@use "abstract" as *;
 
 .menu-items {
   list-style: none;

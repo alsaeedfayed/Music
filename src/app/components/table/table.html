@@ -8,11 +8,20 @@
       </th>
       } @if (isSelectable) {
       <th class="actionCheckBox">
-        <input
-          type="checkbox"
-          [checked]="isAllSelected()"
-          (change)="toggleSelectAll()"
-        />
+        <div class="d-flex gap-4">
+          @if (hasSelection()) {
+          <div class="actions">
+            <ng-content select="[actions]"></ng-content>
+          </div>
+          }
+          <div>
+            <input
+              type="checkbox"
+              [checked]="isAllSelected()"
+              (change)="toggleSelectAll()"
+            />
+          </div>
+        </div>
       </th>
       }
     </tr>

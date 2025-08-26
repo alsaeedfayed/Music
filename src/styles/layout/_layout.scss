@@ -1,9 +1,4 @@
-@import "../abstract/variables/colors";
-@import "../abstract/variables/typography";
-@import "../abstract/mixins/mixins";
-
-//layout wrapper
-
+@use "abstract" as *;
 .app-wrapper {
   display: flex;
   flex-direction: column;

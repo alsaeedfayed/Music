@@ -54,10 +54,10 @@ export class Artist implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.columns.set([
-      { key: 'track', header: 'Track', cellTemplate: this.trackCell },
+      { key: 'title', header: 'Track', cellTemplate: this.trackCell },
       { key: 'album', header: 'Album', cellTemplate: this.albumCell },
-      { key: 'duration', header: 'Time', cellTemplate: this.timeCell },
-      { key: 'action', header: 'Action', cellTemplate: this.actionCell },
+      { key: 'duration', header: 'Duration', cellTemplate: this.timeCell },
+      // { key: 'action', header: 'Action', cellTemplate: this.actionCell },
     ]);
   }
 
@@ -65,14 +65,11 @@ export class Artist implements OnInit, AfterViewInit {
     if (this.artist().id) {
       this.artistService.Get_Artist_tracks(this.artist().id).subscribe({
         next: (res: Track_Api_Response) => {
-          console.log(res);
+          // console.log(res);
           const tracks: Song_Model[] | null = res.data;
           if (tracks?.length) {
             this.store.songs.setPlayList(tracks);
-            console.log(
-              this.store.songs.current(),
-              this.store.songs.playList()
-            );
+            this.songs.set(tracks);
           }
         },
       });

@@ -1,6 +1,4 @@
-@import "abstract/mixins/mixins";
-@import "abstract/variables/colors";
-
+@use "abstract" as *;
 .artistheader {
   &__profile {
     @include flex-center;

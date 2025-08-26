@@ -1,6 +1,5 @@
-@import "abstract/mixins/mixins";
-@import "abstract/variables/colors";
-@import "abstract/variables/typography";
+@use "abstract" as *;
+
 .header {
   &__search {
     position: relative;
@@ -53,7 +52,7 @@
       overflow-y: auto;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
       width: 150%;
-      @media screen and (max-width: $breakpoint-sm) {
+      @media screen and (max-width: $breakpoint-md) {
         width: 100%;
       }
 

@@ -1,4 +1,4 @@
-@import "abstract/mixins/mixins";
+@use "abstract" as *;
 .card {
   position: relative;
   width: 300px;

@@ -1,6 +1,4 @@
-@import "abstract/mixins/mixins";
-@import "abstract/variables/typography";
-
+@use "abstract" as *;
 .context-menu {
   position: relative;
   display: inline-block;

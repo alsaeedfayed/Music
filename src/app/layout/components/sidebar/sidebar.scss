@@ -6,6 +6,9 @@
   margin: 0;
   @include flex-center;
   flex-direction: column;
+  @media screen and (min-width: 90rem) {
+    margin-top: 4rem;
+  }
   &__item {
     text-align: center;
     transition: transform 0.3s ease;

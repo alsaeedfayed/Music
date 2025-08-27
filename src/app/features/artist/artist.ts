@@ -42,6 +42,7 @@ export class Artist implements OnInit, AfterViewInit {
   isSelectable = true;
   columns = signal<Table_Colmun<Song_Model>[]>([]);
   songs = signal<Song_Model[]>([]);
+  isMixPlaying: WritableSignal<boolean> = signal(false);
 
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformID)) {
@@ -82,15 +83,18 @@ export class Artist implements OnInit, AfterViewInit {
       const FirstSong = this.store.songs.playList()?.[0];
       if (FirstSong) {
         this.store.songs.playSong(FirstSong);
+        this.isMixPlaying.set(true);
       }
     }
   }
 
   playSong(song: Song_Model): void {
     this.store.songs.playSong(song);
+    this.isMixPlaying.set(true);
   }
   pause(): void {
     this.store.songs.pause();
+    this.isMixPlaying.set(false);
   }
   viewAlbum(albumId: number) {
     console.log('Album', albumId);

@@ -1,6 +1,10 @@
 <div class="container row">
   <div class="p-5 col-12">
-    <app-artist-header (playMix)="onPlayMix()"></app-artist-header>
+    <app-artist-header
+      (playMix)="onPlayMix()"
+      [isMixPlaying]="isMixPlaying"
+      (pauseMixPlaying)="pause()"
+    ></app-artist-header>
   </div>
 
   <div class="track">

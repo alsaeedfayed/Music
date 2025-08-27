@@ -20,7 +20,14 @@
 
 <div class="artistheader__actions mt-5 d-flex gap-5 align-items-center">
   <button (click)="onplayMix()" class="btn-primary d-flex align-items-center">
+    @if (isMixPlaying()) {
+    <a class="waves-icon">
+      <span class="audio-waves"> <span></span><span></span><span></span> </span>
+    </a>
+    } @else {
     <i class="bx bx-play fs-1"></i> <span>mix</span>
+
+    }
   </button>
   <a><i class="bx bx-heart fs-1 icon"></i></a>
   <span

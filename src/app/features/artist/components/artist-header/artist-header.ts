@@ -24,7 +24,17 @@ export class ArtistHeader implements OnInit {
   artist: WritableSignal<Artist_Model | null> = this.store.artists.current;
   useDefault = signal(false);
   @Output() playMix: EventEmitter<any> = new EventEmitter();
+  @Output() pauseMixPlaying: EventEmitter<any> = new EventEmitter();
+
+  @Input() isMixPlaying: WritableSignal<boolean> = signal(false);
   onplayMix(): void {
-    this.playMix.emit();
+    if (this.isMixPlaying()) {
+      this.pauseMixPlaying.emit();
+    } else {
+      this.playMix.emit();
+    }
+  }
+  pauseMix(): void {
+    this.pauseMixPlaying.emit();
   }
 }

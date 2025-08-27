@@ -13,19 +13,19 @@
 <!-- Templates for custom cells -->
 <ng-template #trackCell let-song>
   <div class="d-flex align-content-center track-cell align-items-center gap-4">
-    <div class="imageicon" (click)="playSong(song)">
+    <div class="imageicon">
       <img [src]="song.album.cover_small" alt="cover" width="40" height="40" />
-      @if (song !== store.songs.current()) {.
-      <i
-        class="play-icon bx bx-play fs-3 p-1 d-flex align-items-center justify-content-center text-white"
-      ></i
-      >} @if (song === store.songs.current()) {
-      <i class="waves-icon" (click)="pause()">
-        <span (click)="pause()" class="audio-waves">
-          <span (click)="pause()"></span><span (click)="pause()"></span
-          ><span></span>
+      @if (song === store.songs.current() && store.songs.isPlaying()) {
+      <a class="waves-icon" (click)="pause()">
+        <span class="audio-waves">
+          <span></span><span (click)="pause()"></span><span></span>
         </span>
-      </i>
+      </a>
+      } @else {
+      <i
+        (click)="playSong(song)"
+        class="play-icon bx bx-play fs-3 p-1 d-flex align-items-center justify-content-center text-white"
+      ></i>
       }
     </div>
     <span>{{ song.title }}</span>

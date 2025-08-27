@@ -16,17 +16,3 @@
     }
   }
 }
-
-::ng-deep {
-  .context-menu {
-    transition: background 0.5s ease;
-    &:hover {
-      background: var(--color-primary-gradient);
-      display: flex;
-      padding: 0.7rem;
-      border-radius: 50%;
-      color: #fff;
-      cursor: pointer;
-    }
-  }
-}

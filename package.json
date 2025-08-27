@@ -11,7 +11,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:Music": "node dist/Music/server/server.mjs",
-    "deploy": "ng build --base-href=https://alsaeedfayed.github.io/Music/ && npx angular-cli-ghpages --dir=dist/Music"
+    "deploy": "ng build --base-href=/Music/ && npx angular-cli-ghpages --dir=dist/Music/browser"
   },
   "prettier": {
     "overrides": [
@@ -44,7 +44,7 @@
     "@angular/build": "^20.0.5",
     "@angular/cli": "^20.0.5",
     "@angular/compiler-cli": "^20.0.0",
-    "@types/express": "^5.0.1",
+    "@types/express": "^5.0.3",
     "@types/jasmine": "~5.1.0",
     "@types/node": "^20.17.19",
     "angular-cli-ghpages": "^2.0.3",

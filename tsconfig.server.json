@@ -1,0 +1,28 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./dist/server",
+    "baseUrl": "src",
+    "module": "commonjs",
+    "types": ["node"],
+    "paths": {
+      "@app/*": ["app/*"],
+      "@core/*": ["app/core/*"],
+      "@env/*": ["environments/*"],
+      "@guards/*": ["app/core/guards/*"],
+      "@interceptors/*": ["app/core/interceptors/*"],
+      "@services/*": ["app/core/services/*"],
+      "@config/*": ["app/core/config/*"],
+      "@shared/*": ["app/shared/*"],
+      "@components/*": ["app/components/*"],
+      "@layout/*": ["app/layout/*"],
+      "@features/*": ["app/features/*"],
+      "@designSystem/*": ["app/design-system/*"],
+      "@fonts/*": ["app/design-system/fonts/*"]
+    }
+  },
+  "files": ["src/main.server.ts"],
+  "angularCompilerOptions": {
+    "entryModule": "src/app/app.server.module#AppServerModule"
+  }
+}

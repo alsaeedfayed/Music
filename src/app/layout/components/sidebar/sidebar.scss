@@ -10,7 +10,7 @@
     text-align: center;
     transition: transform 0.3s ease;
     margin-bottom: 1rem;
-    &:hover {
+    &:hover:not:first {
       transform: scale(1.05);
       background-color: var(--color-card);
     }
@@ -18,6 +18,9 @@
       width: 12rem;
       height: 12rem;
       cursor: pointer;
+      &:hover {
+        background: none;
+      }
     }
     &--icon {
       svg {
@@ -41,5 +44,13 @@
         color: #fff;
       }
     }
+  }
+
+  .active {
+    background: var(--color-primary-gradient);
+    color: #fff;
+  }
+  .site-logo:hover {
+    background: unset !important;
   }
 }

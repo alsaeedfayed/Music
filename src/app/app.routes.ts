@@ -18,4 +18,9 @@ export const routes: Routes = [
       title: 'artist page',
     },
   },
+  {
+    path: 'library',
+    loadComponent: () =>
+      import('@features/library/library').then((m) => m.Library),
+  },
 ];

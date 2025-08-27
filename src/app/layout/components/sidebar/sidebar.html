@@ -2,15 +2,17 @@
   <div>
     <ul class="menu-items">
       <li class="menu-items__item">
-        <img
-          class="menu-items__item--logo"
-          src="assets/images/musiclogo.png"
-          alt="logo"
-        />
+        <a class="site-logo" routerLink="/explore">
+          <img
+            class="menu-items__item--logo"
+            src="assets/images/musiclogo.png"
+            alt="logo"
+          />
+        </a>
       </li>
 
       <li class="menu-items__item">
-        <a routerLink="/home">
+        <a routerLink="/explore" routerLinkActive="active">
           <span class="menu-items__item--icon">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -31,7 +33,7 @@
       </li>
 
       <li class="menu-items__item">
-        <a routerLink="/home">
+        <a routerLink="/library" routerLinkActive="active">
           <span class="menu-items__item--icon">
             <svg
               xmlns="http://www.w3.org/2000/svg"

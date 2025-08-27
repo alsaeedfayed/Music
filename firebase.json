@@ -8,9 +8,5 @@
         "function": "ssr"
       }
     ]
-  },
-  "functions": {
-    "source": "functions",
-    "runtime": "nodejs22"
   }
 }

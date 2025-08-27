@@ -10,6 +10,12 @@
       opacity: 0;
       transition: opacity 0.2s ease;
     }
+
+    .waves-icon {
+      position: absolute;
+      top: 25%;
+      left: 20%;
+    }
   }
   &:hover .imageicon .play-icon {
     opacity: 1;

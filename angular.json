@@ -20,6 +20,7 @@
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
+            "outputPath": "dist/Music",
             "assets": [
               {
                 "glob": "**/*",
@@ -92,6 +93,9 @@
             ],
             "styles": ["src/styles.scss"]
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy"
         }
       }
     }

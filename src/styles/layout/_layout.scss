@@ -68,6 +68,7 @@
 
   &.open {
     transform: translateX(0);
+    box-shadow: unset !important;
   }
 
   .close-btn {

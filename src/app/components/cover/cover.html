@@ -11,11 +11,14 @@
   <div class="card-icons">
     <i (click)="onAddToFavourites(coverData())" class="bx bx-heart"></i>
     @if (store.songs.isPlaying() && coverData().id ===
-    store.songs.currentCoverPlayList()?.id) { } @else {<i
-      (click)="onPlayList(coverData())"
-      class="bx bx-play"
-    ></i
-    >}
+    store.songs.currentCoverPlayList()?.id) {
+    <i class="waves-icon" (click)="pause()">
+      <span (click)="pause()" class="audio-waves">
+        <span (click)="pause()"></span><span (click)="pause()"></span
+        ><span></span>
+      </span>
+    </i>
+    } @else {<i (click)="onPlayList(coverData())" class="bx bx-play"></i>}
     <!-- Menu Component -->
     <i>
       <app-context-menu

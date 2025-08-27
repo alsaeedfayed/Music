@@ -1,6 +1,7 @@
-<header class="header">
+<header class="header" [class.scrolled]="isScrolled">
   <!-- Menu Button on mobile screens -->
   <button class="menu-icon" (click)="menuClicked.emit()">
+    @if (theme() === "dark") {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
@@ -16,6 +17,23 @@
         d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12"
       />
     </svg>
+    } @else {
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="black"
+      stroke-width="1.5"
+      width="24"
+      height="24"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12"
+      />
+    </svg>
+    }
   </button>
 
   <div class="header__search">
@@ -57,7 +75,12 @@
     }
   </div>
   <div class="header__actions">
-    <button class="btn-primary login d-none d-md-block">Login | Sign Up</button>
+    <div class="d-flex gap-4">
+      <button class="btn-primary login d-none d-md-block">Login</button>
+      <button class="btn-primary-outline login d-none d-md-block">
+        Sign Up
+      </button>
+    </div>
 
     <button class="theme-toggle" (click)="toggleTheme()">
       @if (theme() === 'dark') {

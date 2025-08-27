@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import {
   Component,
   EventEmitter,
+  HostListener,
   inject,
   Output,
   signal,
@@ -37,5 +38,12 @@ export class Header {
     // } else {
     //   this.searchResults = [];
     // }
+  }
+
+  isScrolled = false;
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    this.isScrolled = window.scrollY > 0;
   }
 }

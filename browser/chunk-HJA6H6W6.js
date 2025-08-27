@@ -1,0 +1,1 @@
+import{Bb as n,Ja as r,gb as a,hb as i}from"./chunk-ILE2YWSF.js";var o=class t{static \u0275fac=function(e){return new(e||t)};static \u0275cmp=r({type:t,selectors:[["app-library"]],decls:2,vars:0,template:function(e,l){e&1&&(a(0,"p"),n(1,"library works!"),i())},encapsulation:2})};export{o as Library};

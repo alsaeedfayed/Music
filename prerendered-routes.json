@@ -1,0 +1,10 @@
+{
+  "routes": {
+    "/Music": {},
+    "/Music/artist/beyonce": {},
+    "/Music/artist/eminem": {},
+    "/Music/artist/taylor-swift": {},
+    "/Music/explore": {},
+    "/Music/library": {}
+  }
+}

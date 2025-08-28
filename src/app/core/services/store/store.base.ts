@@ -12,8 +12,11 @@ export abstract class BaseStore<T extends { id: string | number }> {
     this.current.set(item);
   }
 
-  addItem(newItem: T): void {
-    this.items.update((currentItems) => [...currentItems, newItem]);
+  addItem(newItem: T | T[]): void {
+    this.items.update((currentItems) => {
+      const newItems = Array.isArray(newItem) ? newItem : [newItem];
+      return [...currentItems, ...newItems];
+    });
   }
 
   removeItem(id: string | number): void {

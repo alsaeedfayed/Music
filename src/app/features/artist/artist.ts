@@ -21,10 +21,17 @@ import { first } from 'rxjs';
 import { Table } from '@app/components/table/table';
 import { ContextMenu } from '@app/components/context-menu/context-menu';
 import { Table_Colmun } from '@app/components/table/models/table.model';
+import { InfiniteScrollDirective } from '@app/directives/infinite-scroll';
 
 @Component({
   selector: 'app-artist',
-  imports: [CommonModule, ArtistHeader, Table, ContextMenu],
+  imports: [
+    CommonModule,
+    ArtistHeader,
+    Table,
+    ContextMenu,
+    InfiniteScrollDirective,
+  ],
   templateUrl: './artist.html',
   styleUrl: './artist.scss',
 })
@@ -43,6 +50,9 @@ export class Artist implements OnInit, AfterViewInit {
   columns = signal<Table_Colmun<Song_Model>[]>([]);
   songs = signal<Song_Model[]>([]);
   isMixPlaying: WritableSignal<boolean> = signal(false);
+  limit = signal(10);
+  index: WritableSignal<number | null> = signal(0);
+  isLoading = signal(false);
 
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformID)) {
@@ -63,18 +73,43 @@ export class Artist implements OnInit, AfterViewInit {
   }
 
   getArtistTopTracks(): void {
+    this.isLoading.set(true);
+    //debugger;
     //refactor // this is not ssr .. need refactor
     if (this.artist().id) {
-      this.artistService.Get_Artist_tracks(this.artist().id).subscribe({
-        next: (res: Track_Api_Response) => {
-          // console.log(res);
-          const tracks: Song_Model[] | null = res.data;
-          if (tracks?.length) {
-            this.store.songs.setPlayList(tracks);
-            this.songs.set(tracks);
-          }
-        },
-      });
+      this.artistService
+        .Get_Artist_tracks(this.artist().id, this.limit(), this.index())
+        .subscribe({
+          next: (res: Track_Api_Response) => {
+            //loader
+            this.isLoading.set(false);
+            // console.log(res);
+            const tracks: Song_Model[] | null = res.data;
+            //for pagination
+            if (res.next) {
+              this.index.update((idx: any) => idx + 10);
+            } else {
+              this.index.set(null);
+            }
+            if (tracks?.length) {
+              this.store.songs.setPlayList(tracks);
+              this.store.songs.addItem(tracks);
+              const songs = this.store.songs.items();
+              this.store.songs.setPlayList(songs);
+              this.songs.set(songs);
+
+              // this.songs.update((current) => [...current, ...tracks]);
+            }
+          },
+        });
+    }
+  }
+
+  //pagination
+  loadMoreSongs() {
+    console.log(this.index());
+    if (this.index()) {
+      this.getArtistTopTracks();
     }
   }
 

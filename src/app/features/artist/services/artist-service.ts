@@ -11,21 +11,25 @@ import { API_CONFIG } from '@app/core/config/api.config';
 export class ArtistService {
   private http = inject(HttpClient);
   private cacheService = inject(Caching);
-  Get_Artist_tracks(artistId: number | string): Observable<Track_Api_Response> {
+  Get_Artist_tracks(
+    artistId: number | string,
+    limit: number,
+    index: number | null
+  ): Observable<Track_Api_Response> {
     //if cached return cached observable
-    const cached = this.cacheService.cache.get(
-      artistId
-    ) as Observable<Track_Api_Response>;
-    if (cached) {
-      return cached;
-    }
+    // const cached = this.cacheService.cache.get(
+    //   artistId
+    // ) as Observable<Track_Api_Response>;
+    // if (cached) {
+    //   return cached;
+    // }
 
     const URL = API_CONFIG.ARTIST.TOP_TRACKS(artistId);
     //caching
     const request$ = this.http
-      .get<Track_Api_Response>(`${URL}?limit=10`)
+      .get<Track_Api_Response>(`${URL}?limit=${limit}&index=${index}`)
       .pipe(shareReplay(1));
-    this.cacheService.Set_Cache(artistId, request$);
+    //this.cacheService.Set_Cache(artistId, request$);
     //return observable
     return request$;
   }

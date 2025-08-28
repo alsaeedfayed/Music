@@ -1,3 +1,14 @@
+::ng-deep {
+  html,
+  body {
+    height: 100% !important;
+    overflow: hidden !important; // Prevent body from scrolling
+  }
+}
+.container {
+  height: 100vh;
+  overflow-y: auto;
+}
 .track-cell {
   .imageicon {
     position: relative;

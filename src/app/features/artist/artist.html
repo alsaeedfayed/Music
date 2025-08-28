@@ -1,4 +1,10 @@
-<div class="container row">
+<div
+  class="container row"
+  infiniteScroll
+  [threshold]="30"
+  [loading]="isLoading()"
+  (reachEnd)="loadMoreSongs()"
+>
   <div class="p-5 col-12">
     <app-artist-header
       (playMix)="onPlayMix()"

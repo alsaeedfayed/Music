@@ -1,5 +1,12 @@
 <!-- components/generic-table/generic-table.component.html -->
 <div class="table-container">
+  <input
+    class="search"
+    #searchBox
+    type="text"
+    placeholder="Search..."
+    (input)="search.set(searchBox.value)"
+  />
   <table class="generic-table">
     <thead>
       <tr>
@@ -29,7 +36,7 @@
     </thead>
 
     <tbody>
-      @for (row of data(); track $index) {
+      @for (row of filteredData(); track $index) {
       <tr class="rowdata">
         <!-- Dynamic cells -->
         @for (col of cols(); track $index) {

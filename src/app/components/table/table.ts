@@ -1,5 +1,6 @@
 import {
   Component,
+  computed,
   ContentChild,
   Input,
   signal,
@@ -25,7 +26,19 @@ export class Table<T> {
   headerContextTpl!: TemplateRef<any>;
   //we will have the selected rows in a set
   selectedRows: Set<MyRow> = new Set<MyRow>();
+  search = signal('');
 
+  // computed signal: filtered data
+  filteredData = computed(() => {
+    const term = this.search().toLowerCase().trim();
+    if (!term) return this.data();
+
+    return this.data().filter((item) =>
+      Object.values(item).some((val) =>
+        String(val).toLowerCase().includes(term)
+      )
+    );
+  });
   // select & unselect row
   toggleRow(row: MyRow): void {
     if (this.selectedRows?.has(row)) {

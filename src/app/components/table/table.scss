@@ -1,0 +1,14 @@
+.search {
+  padding: 1rem;
+  border-radius: 1rem;
+  outline: none;
+  border: 1px solid var(--color-primary);
+  min-width: 34rem;
+  margin-bottom: 1.5rem;
+  background-color: transparent;
+  transition: box-shadow 1s ease;
+
+  &:focus {
+    box-shadow: 0 4px 12px #c3b2e9;
+  }
+}

@@ -32,7 +32,6 @@ export class Table<T> {
   filteredData = computed(() => {
     const term = this.search().toLowerCase().trim();
     if (!term) return this.data();
-
     return this.data().filter((item) =>
       Object.values(item).some((val) =>
         String(val).toLowerCase().includes(term)

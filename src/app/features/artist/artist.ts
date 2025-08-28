@@ -3,6 +3,7 @@ import {
   AfterViewInit,
   Component,
   inject,
+  OnDestroy,
   OnInit,
   PLATFORM_ID,
   Signal,
@@ -35,7 +36,7 @@ import { InfiniteScrollDirective } from '@app/directives/infinite-scroll';
   templateUrl: './artist.html',
   styleUrl: './artist.scss',
 })
-export class Artist implements OnInit, AfterViewInit {
+export class Artist implements OnInit, AfterViewInit, OnDestroy {
   private platformID = inject(PLATFORM_ID);
   private router = inject(Router);
   artist: WritableSignal<Artist_Model> = signal({} as Artist_Model);
@@ -92,7 +93,7 @@ export class Artist implements OnInit, AfterViewInit {
               this.index.set(null);
             }
             if (tracks?.length) {
-              this.store.songs.setPlayList(tracks);
+              //  this.store.songs.setPlayList(tracks);
               this.store.songs.addItem(tracks);
               const songs = this.store.songs.items();
               this.store.songs.setPlayList(songs);
@@ -137,5 +138,9 @@ export class Artist implements OnInit, AfterViewInit {
 
   selectSong(song: any) {
     console.log('Play', song);
+  }
+
+  ngOnDestroy(): void {
+    this.store.songs.clear();
   }
 }

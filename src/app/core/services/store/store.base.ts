@@ -24,4 +24,8 @@ export abstract class BaseStore<T extends { id: string | number }> {
       currentItems.filter((x) => x.id !== id)
     );
   }
+
+  clear(): void {
+    this.items.set([]);
+  }
 }

@@ -28,11 +28,12 @@ import { AlbumService } from '../albums-cmp/services/tracks-service';
 import { ACTIONS } from '@app/core/enums/core.enums';
 import { Router } from '@angular/router';
 import { POD_CAST_DATA } from './models/explore.model';
+import { PlayerBar } from '@app/components/player-bar/player-bar';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [Cover, SwipperCmp],
+  imports: [Cover, SwipperCmp, PlayerBar],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })

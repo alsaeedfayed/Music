@@ -1,0 +1,62 @@
+@if (isBrowser && store.songs.isPlaying() || store.songs.isPaused()) {
+<div class="player-bar">
+  <div class="song-info">
+    <img
+      [src]="currentSong()?.artist?.picture_small"
+      alt="cover"
+      class="cover"
+    />
+    <div class="details">
+      <div class="title">{{ currentSong()?.title }}</div>
+      <div class="artist">{{ currentSong()?.artist?.name }}</div>
+    </div>
+  </div>
+
+  <div class="controls d-flex flex-column align-items-center">
+    <div>
+      <button [disabled]="!store.songs.hasPrev()" (click)="prevSong()">
+        <i
+          [class.text-muted]="!store.songs.hasPrev()"
+          class="bx bx-skip-previous fs-1"
+        ></i>
+      </button>
+      <button>
+        @if (isPlaying()) {
+        <i (click)="store.songs.pause()" class="bx bx-pause fs-1"></i>
+        } @else {
+        <i
+          (click)="store.songs.playSong(store.songs.current())"
+          class="bx bx-play fs-1"
+        ></i>
+        }
+      </button>
+      <button [disabled]="!store.songs.hasNext()" (click)="nextSong()">
+        <i
+          [class.text-muted]="!store.songs.hasNext()"
+          class="bx bx-skip-next fs-1"
+        ></i>
+      </button>
+    </div>
+    <!-- <div class="progress-container">
+      <span>{{ formatTime(currentTime()) }}</span>
+      <input
+        type="range"
+        min="0"
+        [max]="duration"
+        [value]="currentTime()"
+        (input)="onSliderChange($event)"
+      />
+      <span>{{ formatTime(duration) }}</span>
+    </div> -->
+  </div>
+  <div>
+    <span
+      ><i
+        (click)="clearPlayingSong()"
+        class="bx bx-x fs-1 icon border-2 closeIcon"
+      ></i
+    ></span>
+  </div>
+</div>
+
+}

@@ -10,7 +10,7 @@ import { SongState } from './song.state';
   providedIn: 'root',
 })
 export class SongActions extends SongState {
-  private audioPlayer = new Player(() => this.onTrackEnded());
+  audioPlayer = new Player(() => this.onTrackEnded());
   private albums = inject(AlbumService);
   setPlayList(list: Song_Model[] | null): void {
     this.playList.set(list);
@@ -60,11 +60,13 @@ export class SongActions extends SongState {
   pause(): void {
     this.audioPlayer.pause();
     this.isPlaying.set(false);
+    this.isPaused.set(true);
   }
 
   resume(): void {
     this.audioPlayer.resume();
     this.isPlaying.set(true);
+    this.isPaused.set(false);
   }
 
   next(): void {
@@ -76,6 +78,13 @@ export class SongActions extends SongState {
     }
   }
 
+  playNext(): void {
+    const nexSongIndex = this.currentIndex() + 1;
+    const currentPlayList = this.playList() ?? [];
+    const nextSong = currentPlayList[nexSongIndex];
+    this.playSong(nextSong);
+  }
+
   prev(): void {
     const idx = this.currentIndex();
     if (this.hasPrev()) {
@@ -85,6 +94,21 @@ export class SongActions extends SongState {
     }
   }
 
+  playPrev(): void {
+    const prevSongIndex = this.currentIndex() - 1;
+    const currentPlayList = this.playList() ?? [];
+    const prevSong = currentPlayList[prevSongIndex];
+    this.playSong(prevSong);
+  }
+
+  //clear by closing playing bar
+  clearCurrent(): void {
+    this.audioPlayer.stop();
+    this.current.set(null);
+    this.playList.set(null);
+    this.isPaused.set(false);
+    this.isPlaying.set(false);
+  }
   private onTrackEnded(): void {
     if (this.hasNext()) {
       this.next(); // play next if available

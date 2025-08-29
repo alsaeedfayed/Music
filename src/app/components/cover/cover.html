@@ -10,8 +10,8 @@
   <!-- ICONS -->
   <div class="card-icons">
     <i (click)="onAddToFavourites(coverData())" class="bx bx-heart"></i>
-    @if (store.songs.isPlaying() && coverData().id ===
-    store.songs.currentCoverPlayList()?.id) {
+    @if (store.songs.isPlaying() && !store.songs.isPaused() && coverData().id
+    === store.songs.currentCoverPlayList()?.id) {
     <i class="waves-icon" (click)="pause()">
       <span (click)="pause()" class="audio-waves">
         <span (click)="pause()"></span><span (click)="pause()"></span

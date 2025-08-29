@@ -1,5 +1,5 @@
 export class Player {
-  private audio: HTMLAudioElement | null = null;
+  audio: HTMLAudioElement | null = null;
   //pass call back to call next song
   constructor(private onEnded: () => void) {}
 

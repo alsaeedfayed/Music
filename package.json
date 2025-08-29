@@ -33,6 +33,8 @@
     "@angular/platform-server": "^20.0.0",
     "@angular/router": "^20.0.0",
     "@angular/ssr": "^20.0.5",
+    "@ngneat/overview": "6.1.1",
+    "@ngxpert/hot-toast": "^5.1.1",
     "bootstrap": "^5.3.7",
     "boxicons": "^2.1.4",
     "express": "^5.1.0",

@@ -17,6 +17,7 @@ import {
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import { LoaderInterceptor } from './core/interceptors/loader.interceptor';
+import { provideHotToastConfig } from '@ngxpert/hot-toast';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -29,6 +30,6 @@ export const appConfig: ApplicationConfig = {
       provide: HTTP_INTERCEPTORS,
       useClass: LoaderInterceptor,
       multi: true,
-    },
+    }, provideHotToastConfig(),
   ],
 };

@@ -11,6 +11,7 @@ import {
 import { ContextMenu } from '@app/components/context-menu/context-menu';
 import { Artist_Model } from '@app/core/models/core.models';
 import { RootStore } from '@app/core/services/store/store.orcchestrator';
+import { HotToastService } from '@ngxpert/hot-toast';
 
 @Component({
   selector: 'app-artist-header',
@@ -27,6 +28,7 @@ export class ArtistHeader implements OnInit {
   @Output() pauseMixPlaying: EventEmitter<any> = new EventEmitter();
 
   @Input() isMixPlaying: WritableSignal<boolean> = signal(false);
+
   onplayMix(): void {
     if (this.isMixPlaying()) {
       this.pauseMixPlaying.emit();

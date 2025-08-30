@@ -10,6 +10,7 @@ export class SongState extends BaseStore<Song_Model> {
   public isPlaying: WritableSignal<boolean> = signal(false);
   public isPaused: WritableSignal<boolean> = signal(false);
   public playList: WritableSignal<Song_Model[] | null> = signal(null);
+  public playlistId!: number;
   public currentCoverPlayList: WritableSignal<Play_List<any> | null> =
     signal(null);
 

@@ -1,4 +1,55 @@
-<app-track-headerpage
-  [data]="album()"
-  [mapper]="albumMapper"
-></app-track-headerpage>
+<div class="container flex-column">
+  @defer (when album()) {
+  <app-track-headerpage
+    [data]="album()"
+    [mapper]="albumMapper"
+    (playMix)="onPlayMix()"
+  >
+    <div moredetails>
+      <span>{{ album()?.artist?.name }}</span>
+    </div>
+  </app-track-headerpage>
+  }
+
+  <div class="album-tracks mt-5">
+    <app-table [cols]="columns" [isSelectable]="false" [data]="albumSongs">
+    </app-table>
+  </div>
+
+  @if (album()) {
+  <ng-template #titleCell let-song>
+    <div
+      class="d-flex align-content-center title-cell align-items-center gap-4"
+    >
+      <div class="imageicon">
+        <img [src]="album()?.cover_small" alt="cover" width="40" height="40" />
+        @if (song === store.songs.current() && store.songs.isPlaying()) {
+        <a (click)="pause()" class="waves-icon">
+          <span class="audio-waves">
+            <span></span><span></span><span></span>
+          </span>
+        </a>
+        } @else {
+        <i
+          (click)="playSong(song)"
+          class="play-icon bx bx-play fs-3 p-1 d-flex align-items-center justify-content-center text-white"
+        ></i>
+        }
+      </div>
+      <span>{{ song.title }}</span>
+    </div>
+  </ng-template>
+  }
+
+  <ng-template #artistCell let-song>
+    <div
+      class="d-flex align-content-center title-cell align-items-center gap-4"
+    >
+      <span>
+        <app-context-menu [useDefault]="true"></app-context-menu>
+      </span>
+      <span><i class="bx bx-heart"></i></span>
+      <span>{{ song.title }}</span>
+    </div>
+  </ng-template>
+</div>

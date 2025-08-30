@@ -1,0 +1,69 @@
+<div class="container">
+  @if (data() && mapper()) {
+  <header class="mt-5 w-100 cover mt-4">
+    <div class="d-flex flex-column flex-sm-row gap-4 w-100">
+      <img
+        class="cover___img object-fit-contain"
+        [src]="mapper()!(data()!)?.cover"
+        alt="artist image"
+      />
+      <div class="cover__details d-flex flex-column gap-2">
+        <span class="cover__details--title fw-bold fs-1">{{
+          mapper()!(data()!)?.title
+        }}</span>
+        <ng-content select="[moredetails]"></ng-content>
+      </div>
+    </div>
+    <div class="mt-4 cover__actions d-flex gap-5 align-items-center">
+      <button
+        (click)="onplayMix()"
+        class="btn-primary d-flex align-items-center"
+      >
+        @if (false) {
+        <a class="waves-icon">
+          <span class="audio-waves">
+            <span></span><span></span><span></span>
+          </span>
+        </a>
+        } @else {
+        <i class="bx bx-play fs-1"></i> <span>Mix</span>
+
+        }
+      </button>
+      <a><i class="bx bx-heart fs-1 icon"></i></a>
+      <app-context-menu class="more-icon" [useDefault]="false">
+        <li>
+          <div class="context-menu__card--item">
+            <i class="bx bx-play fs-2"></i>
+            <span>play mix</span>
+          </div>
+        </li>
+        <li>
+          <div class="context-menu__card--item">
+            <i class="bx bx-heart fs-2"></i>
+            <span>add to my favourites</span>
+          </div>
+        </li>
+        <li>
+          <div class="context-menu__card--item">
+            <i class="bx bx-share fs-2"></i>
+            <span>share</span>
+          </div>
+        </li>
+        <li>
+          <div class="context-menu__card--item">
+            <i class="bx bx-block fs-2"></i>
+            <span>dont recommend this artist</span>
+          </div>
+        </li>
+        <li>
+          <div class="context-menu__card--item">
+            <i class="bx bx-message fs-2"></i>
+            <span>report a problem</span>
+          </div>
+        </li>
+      </app-context-menu>
+    </div>
+  </header>
+  }
+</div>

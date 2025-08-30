@@ -22,6 +22,8 @@ export interface Album_Model {
   md5_image: string;
   tracklist: string;
   type: string;
+  position: number;
+  artist: Artist_Model;
 }
 
 export interface Song_Model {

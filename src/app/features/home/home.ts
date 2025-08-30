@@ -7,6 +7,7 @@ import {
   signal,
   PLATFORM_ID,
   effect,
+  Signal,
 } from '@angular/core';
 import { Explore } from './services/explore';
 import { Cover } from '@app/components/cover/cover';
@@ -29,6 +30,8 @@ import { ACTIONS } from '@app/core/enums/core.enums';
 import { Router } from '@angular/router';
 import { POD_CAST_DATA } from './models/explore.model';
 import { PlayerBar } from '@app/components/player-bar/player-bar';
+import { Album_Model } from '@app/core/models/core.models';
+import { ALBUM } from '../albums-cmp/models/tracks.model';
 
 @Component({
   selector: 'app-home',
@@ -144,6 +147,14 @@ export class Home implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
+  goToAlbum(Album: any): void {
+    const album: Album_Model = Album().rawData;
+    this.router.navigate(['albums', album.id], {
+      state: {
+        album: album,
+      },
+    });
+  }
   onMenuActionTracks(
     action: string,
     data: WritableSignal<Play_List<TRACKS_DATA>>

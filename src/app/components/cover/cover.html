@@ -6,7 +6,12 @@
     coverData().id === store.songs.currentCoverPlayList()?.id
   "
 >
-  <img [src]="coverData().coverUrl?.()" alt="Card image" class="card-image" />
+  <img
+    (click)="onClickCard()"
+    [src]="coverData().coverUrl?.()"
+    alt="Card image"
+    class="card-image"
+  />
   <!-- ICONS -->
   <div class="card-icons">
     <i (click)="onAddToFavourites(coverData())" class="bx bx-heart"></i>

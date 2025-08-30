@@ -19,6 +19,14 @@ export const routes: Routes = [
     },
   },
   {
+    path: 'albums/:id',
+    loadComponent: () =>
+      import('@features/albums-cmp/album').then((m) => m.AlbumsCmp),
+    data: {
+      title: 'albums',
+    },
+  },
+  {
     path: 'library',
     loadComponent: () =>
       import('@features/library/library').then((m) => m.Library),

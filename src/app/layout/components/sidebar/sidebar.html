@@ -1,7 +1,7 @@
 <div class="sidebar" [class.open]="open">
   <div>
     <ul class="menu-items">
-      <li class="menu-items__item">
+      <li (click)="closeOpenSideBar()" class="menu-items__item">
         <a class="site-logo" routerLink="/explore">
           <img
             class="menu-items__item--logo"
@@ -11,7 +11,7 @@
         </a>
       </li>
 
-      <li class="menu-items__item">
+      <li (click)="closeOpenSideBar()" class="menu-items__item">
         <a routerLink="/explore" routerLinkActive="active">
           <span class="menu-items__item--icon">
             <svg
@@ -32,7 +32,7 @@
         </a>
       </li>
 
-      <li class="menu-items__item">
+      <li (click)="closeOpenSideBar()" class="menu-items__item">
         <a routerLink="/library" routerLinkActive="active">
           <span class="menu-items__item--icon">
             <svg
@@ -54,7 +54,7 @@
         </a>
       </li>
 
-      <li class="menu-items__item">
+      <li (click)="closeOpenSideBar()" class="menu-items__item">
         <a routerLink="/home">
           <span class="menu-items__item--icon">
             <svg

@@ -12,4 +12,8 @@ export class Sidebar {
   @Output() closeSidebar = new EventEmitter<void>();
 
   onLogout() {}
+
+  closeOpenSideBar() {
+    this.open = false;
+  }
 }

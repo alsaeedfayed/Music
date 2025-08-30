@@ -64,7 +64,7 @@ export class SwipperCmp implements AfterViewInit, OnDestroy {
       },
       // pagination: { el: '.swiper-pagination' },
       autoplay: {
-        delay: 10000,
+        delay: 100000,
         disableOnInteraction: true,
         pauseOnMouseEnter: true,
         waitForTransition: true,

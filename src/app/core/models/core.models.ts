@@ -1,3 +1,5 @@
+import { FormControl } from '@angular/forms';
+
 export interface Artist_Model {
   id: number;
   name: string;
@@ -60,4 +62,18 @@ export interface Contributer_Model {
   tracklist: string;
   type: string;
   role: string;
+}
+
+export interface User_Model {
+  firstName: FormControl<string>;
+  middleName: FormControl<string>;
+  lastName: FormControl<string>;
+  mobileNo: FormControl<string>;
+  emailId: FormControl<string>;
+  altMobileNo: FormControl<string | null>;
+  password: FormControl<string>;
+  city: FormControl<string>;
+  state: FormControl<string>;
+  pincode: FormControl<string>;
+  addressLine: FormControl<string>;
 }

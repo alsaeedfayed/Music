@@ -76,8 +76,18 @@
   </div>
   <div class="header__actions">
     <div class="d-flex gap-4">
-      <button class="btn-primary login d-none d-md-block">Login</button>
-      <button class="btn-primary-outline login d-none d-md-block">
+      <button
+        data-bs-toggle="modal"
+        data-bs-target="#signInModal"
+        class="btn-primary login d-none d-md-block"
+      >
+        Login
+      </button>
+      <button
+        data-bs-toggle="modal"
+        data-bs-target="#signUpModal"
+        class="btn-primary-outline login d-none d-md-block"
+      >
         Sign Up
       </button>
     </div>
@@ -125,3 +135,5 @@
     </button>
   </div>
 </header>
+
+<app-auth-modals #auth></app-auth-modals>

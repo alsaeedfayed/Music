@@ -39,3 +39,24 @@
 .bg-gradient-secondary {
   background: var(--color-secondary-gradient);
 }
+
+.modal-header {
+  h5 {
+    font-size: 2rem;
+  }
+}
+
+.modal-body,
+.modal-footer button {
+  font-size: 1.6rem;
+}
+
+.form-control {
+  font-size: 1.5rem;
+  padding: 1rem;
+
+  &:focus {
+    box-shadow: none;
+    border-color: var(--color-primary);
+  }
+}

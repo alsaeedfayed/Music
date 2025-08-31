@@ -10,10 +10,11 @@ import {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Theme } from '@app/layout/services/theme/theme';
+import { AuthModals } from '@app/components/auth-modals/auth-modals';
 
 @Component({
   selector: 'app-header',
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, AuthModals],
   templateUrl: './header.html',
   styleUrl: './header.scss',
 })
@@ -41,6 +42,7 @@ export class Header {
   }
 
   isScrolled = false;
+  showModal = signal(false);
 
   @HostListener('window:scroll', [])
   onWindowScroll() {

@@ -1,0 +1,211 @@
+<!--Sign in Modal -->
+<div
+  class="modal fade"
+  id="signInModal"
+  tabindex="-1"
+  aria-labelledby="signInModalLabel"
+  aria-hidden="true"
+  [ngClass]="{ show: isSignInVisible }"
+  [ngStyle]="{ display: isSignInVisible ? 'block' : 'none' }"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="signInModalLabel">Sign In</h5>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3"></div>
+          <div class="mb-3"></div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          (click)="closeSignInModal()"
+          type="button"
+          class="btn btn-danger"
+          data-bs-dismiss="modal"
+        >
+          Close
+        </button>
+        <button type="button" class="btn btn-primary">Log In</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--signup -->
+
+<div
+  class="modal fade"
+  id="signUpModal"
+  tabindex="-1"
+  aria-labelledby="signUpModalLabel"
+  aria-hidden="true"
+  [ngClass]="{ show: isSignUpVisible }"
+  [ngStyle]="{ display: isSignUpVisible ? 'block' : 'none' }"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="signInModalLabel">Register User</h5>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="userRegisterForm" (ngSubmit)="register()">
+          <input
+            class="form-control"
+            formControlName="firstName"
+            placeholder="First Name"
+            [ngClass]="{
+              errorControl:
+                hasError('firstName', 'required') ||
+                hasError('firstName', 'minlength')
+            }"
+          />
+          @if (hasError('firstName', 'required')) {
+          <span class="text-danger mt-2">First name is required</span>
+          } @if (hasError('firstName', 'minlength')) {
+          <span class="text-danger mt-2"
+            >First name min length is 3 letters</span
+          >
+          }
+          <input
+            class="form-control mt-4"
+            formControlName="middleName"
+            placeholder="Middle Name"
+            [ngClass]="{
+              errorControl: hasError('middleName', 'required')
+            }"
+          />
+          <input
+            class="form-control mt-4"
+            formControlName="lastName"
+            placeholder="Last Name"
+            [ngClass]="{
+              errorControl:
+                hasError('lastName', 'required') ||
+                hasError('lastName', 'minlength')
+            }"
+          />
+          @if (hasError('lastName', 'required')) {
+          <span class="text-danger mt-2">Last name is required</span>
+          } @if (hasError('lastName', 'minlength')) {
+          <span class="text-danger mt-2"
+            >Last name min length is 3 letters</span
+          >
+          }
+          <input
+            class="form-control mt-4"
+            formControlName="emailId"
+            placeholder="Email"
+            type="email"
+            [ngClass]="{
+              errorControl:
+                hasError('emailId', 'required') || hasError('emailId', 'email')
+            }"
+          />
+          @if (hasError('emailId', 'required')) {
+          <span class="text-danger mt-2">Email name is required</span>
+          } @if (hasError('emailId', 'email')) {
+          <span class="text-danger mt-2">Enter valid email</span>
+          }
+          <input
+            class="form-control mt-4"
+            formControlName="password"
+            placeholder="Password"
+            type="password"
+            [ngClass]="{
+              errorControl:
+                hasError('password', 'required') ||
+                hasError('password', 'minlength')
+            }"
+          />
+
+          @if (hasError('password', 'required')) {
+          <span class="text-danger mt-2">Last name is required</span>
+          } @if (hasError('password', 'minlength')) {
+          <span class="text-danger mt-2">Password min length is 6 letters</span>
+          }
+          <input
+            class="form-control mt-4"
+            formControlName="mobileNo"
+            placeholder="Mobile No"
+            [ngClass]="{
+              errorControl:
+                hasError('mobileNo', 'required') ||
+                hasError('mobileNo', 'minlength')
+            }"
+          />
+          @if (hasError('mobileNo', 'required')) {
+          <span class="text-danger mt-2">Mobile is required</span>
+          } @if (hasError('mobileNo', 'minlength')) {
+          <span class="text-danger mt-2">Mobile min length is 10 letters</span>
+          }
+          <input
+            class="form-control mt-4"
+            formControlName="altMobileNo"
+            placeholder="Alt Mobile No"
+          />
+
+          <input
+            class="form-control mt-4"
+            formControlName="city"
+            placeholder="City"
+            [ngClass]="{
+              errorControl: hasError('city', 'required')
+            }"
+          />
+          @if (hasError('city', 'required')) {
+          <span class="text-danger mt-2">city is required</span>
+          }
+          <input
+            class="form-control mt-4"
+            formControlName="state"
+            placeholder="State"
+            [ngClass]="{
+              errorControl: hasError('state', 'required')
+            }"
+          />
+          @if (hasError('state', 'required')) {
+          <span class="text-danger mt-2">state is required</span>
+          }
+          <input
+            class="form-control mt-4"
+            formControlName="pincode"
+            placeholder="Pincode"
+            [ngClass]="{
+              errorControl: hasError('pincode', 'required')
+            }"
+          />
+          @if (hasError('pincode', 'required')) {
+          <span class="text-danger mt-2">pincode is required</span>
+          }
+          <input
+            class="form-control mt-4"
+            formControlName="addressLine"
+            placeholder="Address Line"
+            [ngClass]="{
+              errorControl: hasError('addressLine', 'required')
+            }"
+          />
+          @if (hasError('addressLine', 'required')) {
+          <span class="text-danger mt-2">addressLine is required</span>
+          }
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          (click)="closeSignUpModal()"
+          type="button"
+          class="btn btn-danger"
+          data-bs-dismiss="modal"
+        >
+          Close
+        </button>
+        <button (click)="register()" type="submit" class="btn btn-primary">
+          Log In
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -77,3 +77,26 @@ export interface User_Model {
   pincode: FormControl<string>;
   addressLine: FormControl<string>;
 }
+
+export interface Register_Payload_Model {
+  userId: string | number;
+  firstName: string;
+  middleName: string;
+  lastName: string;
+  mobileNo: string;
+  emailId: string;
+  altMobileNo: string | null;
+  password: string;
+  userAddress: {
+    city: string;
+    state: string;
+    pincode: string;
+    addressLine: string;
+  };
+  userSocialDetails: {
+    facebookProfileUrl: string;
+    linkdinProfileUrl: string;
+    instagramHandle: string;
+    twitterHandle: string;
+  };
+}

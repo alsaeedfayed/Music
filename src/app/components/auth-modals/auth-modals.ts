@@ -1,7 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { User_Model } from '@app/core/models/core.models';
+import {
+  Register_Payload_Model,
+  User_Model,
+} from '@app/core/models/core.models';
+import { Auth } from '@app/core/services/auth/auth';
+import { HotToastService } from '@ngxpert/hot-toast';
 
 @Component({
   selector: 'app-auth-modals',
@@ -11,6 +16,8 @@ import { User_Model } from '@app/core/models/core.models';
 })
 export class AuthModals {
   private fb = inject(FormBuilder);
+  private authService = inject(Auth);
+  private toast = inject(HotToastService);
   submitted = false;
 
   // Typed form
@@ -70,11 +77,46 @@ export class AuthModals {
 
   register(): void {
     this.submitted = true;
-
     if (this.userRegisterForm.invalid) {
       this.userRegisterForm.markAllAsTouched();
       return;
     }
+    const payload: Register_Payload_Model = {
+      userId: 0,
+      firstName: this.userRegisterForm.controls.firstName.value,
+      lastName: this.userRegisterForm.controls.lastName.value,
+      middleName: this.userRegisterForm.controls.middleName.value,
+      mobileNo: this.userRegisterForm.controls.mobileNo.value,
+      altMobileNo: this.userRegisterForm.controls.altMobileNo.value,
+      emailId: this.userRegisterForm.controls.emailId.value,
+      password: this.userRegisterForm.controls.password.value,
+
+      userAddress: {
+        city: this.userRegisterForm.controls.city.value,
+        state: this.userRegisterForm.controls.state.value,
+        pincode: this.userRegisterForm.controls.pincode.value,
+        addressLine: this.userRegisterForm.controls.addressLine.value,
+      },
+      userSocialDetails: {
+        facebookProfileUrl: 'string',
+        instagramHandle: 'string',
+        linkdinProfileUrl: 'string',
+        twitterHandle: 'string',
+      },
+    };
+
+    this.authService.registerNewUser(payload).subscribe({
+      next: (res: { message: string; result: boolean; data: string }) => {
+        if (res.result) {
+          this.toast.success('User registered success, please log in');
+        } else {
+          this.toast.error(res.message);
+        }
+      },
+      error: (err) => {
+        this.toast.error("This didn't work.");
+      },
+    });
   }
 
   // Helper to check validity in template

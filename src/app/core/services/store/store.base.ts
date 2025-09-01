@@ -1,6 +1,6 @@
 import { signal, WritableSignal } from '@angular/core';
 
-export abstract class BaseStore<T extends { id: string | number }> {
+export abstract class BaseStore<T extends { id?: string | number }> {
   public items: WritableSignal<T[]> = signal([]);
   public current: WritableSignal<T | null> = signal(null);
 

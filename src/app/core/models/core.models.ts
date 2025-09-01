@@ -100,3 +100,11 @@ export interface Register_Payload_Model {
     twitterHandle: string;
   };
 }
+
+export interface User_Session {
+  id?: string | number;
+  userId: number | string;
+  emailId: string;
+  token: string;
+  refreshToken: string;
+}

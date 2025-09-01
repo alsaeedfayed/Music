@@ -11,6 +11,7 @@ import {
   User_Model,
 } from '@app/core/models/core.models';
 import { Auth, Login } from '@app/core/services/auth/auth';
+import { RootStore } from '@app/core/services/store/store.orcchestrator';
 import { HotToastService } from '@ngxpert/hot-toast';
 
 @Component({
@@ -23,6 +24,7 @@ export class AuthModals {
   private fb = inject(FormBuilder);
   private authService = inject(Auth);
   private toast = inject(HotToastService);
+  private store = inject(RootStore);
   submitted = false;
 
   userSignInForm = this.fb.nonNullable.group<{
@@ -151,6 +153,7 @@ export class AuthModals {
       next: (res: Login) => {
         this.closeSignInModal();
         this.toast.success(res.message);
+        this.store.auth.setUserSession(res.data);
       },
       error: (err) => {
         this.toast.error(err.message);

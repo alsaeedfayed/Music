@@ -75,6 +75,7 @@
     }
   </div>
   <div class="header__actions">
+    @if (!store.auth.isAuthenticated()) {
     <div class="d-flex gap-4">
       <button
         data-bs-toggle="modal"
@@ -91,6 +92,11 @@
         Sign Up
       </button>
     </div>
+    } @else {
+    <button (click)="logOut()" class="btn btn-danger d-none d-md-block fs-4">
+      Log Out <i class="bx bx-log-out bx-rotate-180"></i>
+    </button>
+    }
 
     <button class="theme-toggle" (click)="toggleTheme()">
       @if (theme() === 'dark') {

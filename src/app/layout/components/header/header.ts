@@ -11,6 +11,7 @@ import {
 import { FormsModule } from '@angular/forms';
 import { Theme } from '@app/layout/services/theme/theme';
 import { AuthModals } from '@app/components/auth-modals/auth-modals';
+import { RootStore } from '@app/core/services/store/store.orcchestrator';
 
 @Component({
   selector: 'app-header',
@@ -24,6 +25,7 @@ export class Header {
   searchResults: any[] = [];
   //inject theme service
   private themeService = inject(Theme);
+  store = inject(RootStore);
   //get theme as readonly signal
   theme = this.themeService.getTheme();
   //toggle theme
@@ -47,5 +49,9 @@ export class Header {
   @HostListener('window:scroll', [])
   onWindowScroll() {
     this.isScrolled = window.scrollY > 0;
+  }
+
+  logOut(): void {
+    this.store.auth.logOut();
   }
 }

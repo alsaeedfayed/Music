@@ -1,11 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import {
   Register_Payload_Model,
   User_Model,
 } from '@app/core/models/core.models';
-import { Auth } from '@app/core/services/auth/auth';
+import { Auth, Login } from '@app/core/services/auth/auth';
 import { HotToastService } from '@ngxpert/hot-toast';
 
 @Component({
@@ -19,6 +24,18 @@ export class AuthModals {
   private authService = inject(Auth);
   private toast = inject(HotToastService);
   submitted = false;
+
+  userSignInForm = this.fb.nonNullable.group<{
+    emailID: FormControl<string>;
+    password: FormControl<string>;
+  }>({
+    emailID: this.fb.nonNullable.control('', {
+      validators: [Validators.required, Validators.email],
+    }),
+    password: this.fb.nonNullable.control('', {
+      validators: [Validators.required],
+    }),
+  });
 
   // Typed form
   userRegisterForm = this.fb.nonNullable.group<User_Model>({
@@ -62,7 +79,7 @@ export class AuthModals {
   closeSignInModal() {
     this.isSignInVisible = false;
     this.submitted = false;
-    // this.userRegisterForm.reset();
+    this.userSignInForm.reset();
   }
 
   openSignUpModal() {
@@ -119,12 +136,41 @@ export class AuthModals {
     });
   }
 
+  signIn(): void {
+    this.submitted = true;
+    if (this.userSignInForm.invalid) {
+      this.userSignInForm.markAllAsTouched();
+      return;
+    }
+    const payload: { emailId: string; password: string } = {
+      emailId: this.userSignInForm.controls.emailID.value,
+      password: this.userSignInForm.controls.password.value,
+    };
+
+    this.authService.login(payload).subscribe({
+      next: (res: Login) => {
+        this.closeSignInModal();
+        this.toast.success(res.message);
+      },
+      error: (err) => {
+        this.toast.error(err.message);
+      },
+    });
+  }
   // Helper to check validity in template
   hasError(
     controlName: keyof typeof this.userRegisterForm.controls,
     error: string
   ): boolean {
     const control = this.userRegisterForm.get(controlName);
+    return !!control && control.hasError(error) && this.submitted;
+  }
+
+  hasErrorSignIn(
+    controlName: keyof typeof this.userSignInForm.controls,
+    error: string
+  ): boolean {
+    const control = this.userSignInForm.get(controlName);
     return !!control && control.hasError(error) && this.submitted;
   }
 }

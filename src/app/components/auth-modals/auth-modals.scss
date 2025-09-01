@@ -24,3 +24,14 @@
     transform: translateX(0);
   }
 }
+
+::ng-deep {
+  .hot-toast-message {
+    font-size: 1.4rem;
+    flex-wrap: wrap;
+  }
+  .hot-toast-bar-base {
+    flex-wrap: wrap;
+    text-wrap: wrap;
+  }
+}

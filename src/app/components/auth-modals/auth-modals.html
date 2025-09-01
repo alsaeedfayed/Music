@@ -14,9 +14,36 @@
         <h5 class="modal-title" id="signInModalLabel">Sign In</h5>
       </div>
       <div class="modal-body">
-        <form>
-          <div class="mb-3"></div>
-          <div class="mb-3"></div>
+        <form [formGroup]="userSignInForm">
+          <input
+            class="form-control mt-4"
+            formControlName="emailID"
+            placeholder="Email"
+            type="email"
+            [ngClass]="{
+              errorControl:
+                hasErrorSignIn('emailID', 'required') ||
+                hasErrorSignIn('emailID', 'email')
+            }"
+          />
+          @if (hasErrorSignIn('emailID', 'required')) {
+          <span class="text-danger mt-2">Email is required</span>
+          } @if (hasErrorSignIn('emailID', 'email')) {
+          <span class="text-danger mt-2">Enter valid email</span>
+          }
+          <input
+            class="form-control mt-4"
+            formControlName="password"
+            placeholder="Password"
+            type="password"
+            [ngClass]="{
+              errorControl: hasErrorSignIn('password', 'required')
+            }"
+          />
+
+          @if (hasErrorSignIn('password', 'required')) {
+          <span class="text-danger mt-2">Password is required</span>
+          }
         </form>
       </div>
       <div class="modal-footer">
@@ -28,7 +55,9 @@
         >
           Close
         </button>
-        <button type="button" class="btn btn-primary">Log In</button>
+        <button (click)="signIn()" type="submit" class="btn btn-primary">
+          Log In
+        </button>
       </div>
     </div>
   </div>

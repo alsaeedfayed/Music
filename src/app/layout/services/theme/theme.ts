@@ -1,7 +1,7 @@
 import { isPlatformBrowser } from '@angular/common';
 import { inject, Inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
+import { THEME_KEY } from '@app/core/config/keys';
 import { ReactiveStorage } from '@app/core/services/storage/reactive-storage';
-export const THEME_KEY = 'app-theme';
 
 @Injectable({
   providedIn: 'root',

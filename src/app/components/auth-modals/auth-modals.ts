@@ -11,6 +11,7 @@ import {
   User_Model,
 } from '@app/core/models/core.models';
 import { Auth, Login } from '@app/core/services/auth/auth';
+import { CookieService } from '@app/core/services/cookies/cookie';
 import { RootStore } from '@app/core/services/store/store.orcchestrator';
 import { HotToastService } from '@ngxpert/hot-toast';
 
@@ -25,6 +26,7 @@ export class AuthModals {
   private authService = inject(Auth);
   private toast = inject(HotToastService);
   private store = inject(RootStore);
+  private cookies = inject(CookieService);
   submitted = false;
 
   userSignInForm = this.fb.nonNullable.group<{
@@ -154,6 +156,12 @@ export class AuthModals {
         this.closeSignInModal();
         this.toast.success(res.message);
         this.store.auth.setUserSession(res.data);
+        this.cookies.set('token', this.store.auth.session()?.token!, {
+          httpOnly: true,
+          path: '/',
+          maxAge: 60 * 60 * 24 * 7, // 7 days
+        });
+        console.log(this.cookies.get('token'));
       },
       error: (err) => {
         this.toast.error(err.message);

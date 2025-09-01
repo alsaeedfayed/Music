@@ -108,3 +108,9 @@ export interface User_Session {
   token: string;
   refreshToken: string;
 }
+
+export interface Refresh_Token {
+  emailId: string;
+  token: string;
+  refreshToken: string;
+}

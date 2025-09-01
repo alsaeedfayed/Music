@@ -1,6 +1,7 @@
-import { isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import {
   AfterViewInit,
+  ChangeDetectorRef,
   Component,
   inject,
   OnInit,
@@ -19,6 +20,8 @@ import { AlbumService } from './services/tracks-service';
 import { Table } from '@app/components/table/table';
 import { Table_Colmun } from '@app/components/table/models/table.model';
 import { ContextMenu } from '@app/components/context-menu/context-menu';
+import { HttpClient } from '@angular/common/http';
+import { CookieService } from '@app/core/services/cookies/cookie';
 
 @Component({
   selector: 'app-albums-cmp',
@@ -27,6 +30,8 @@ import { ContextMenu } from '@app/components/context-menu/context-menu';
   styleUrl: './albums-cmp.scss',
 })
 export class AlbumsCmp implements OnInit, AfterViewInit {
+  constructor(private cdr: ChangeDetectorRef) {}
+
   ngOnInit(): void {
     if (isPlatformBrowser(this.platFormId)) {
       const album = window.history.state.album;
@@ -34,8 +39,10 @@ export class AlbumsCmp implements OnInit, AfterViewInit {
       // console.log(album);
       this.getAlbumTracks();
     }
+    this.getUsers();
   }
-
+  value = '';
+  private coock = inject(CookieService);
   ngAfterViewInit(): void {
     this.columns.set([
       { key: 'title', header: 'TRACK', cellTemplate: this.titleCell },
@@ -44,6 +51,10 @@ export class AlbumsCmp implements OnInit, AfterViewInit {
       { key: 'duration', header: 'Duration' },
       // { key: 'action', header: 'Action', cellTemplate: this.actionCell },
     ]);
+    setTimeout(() => {
+      this.value = 'dhoni';
+    });
+    this.cdr.detectChanges();
   }
 
   album: WritableSignal<Album_Model | null> = signal(null);
@@ -86,5 +97,16 @@ export class AlbumsCmp implements OnInit, AfterViewInit {
   }
   pause(): void {
     this.store.songs.pause();
+  }
+
+  //test
+  private http = inject(HttpClient);
+  users: any[] = [];
+  getUsers() {
+    return this.http
+      .get('https://freeapi.miniprojectideas.com/api/JWT/GetAllUsers')
+      .subscribe((res: any) => {
+        this.users = res.data;
+      });
   }
 }

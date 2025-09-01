@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Register_Payload_Model } from '@app/core/models/core.models';
 import { Observable } from 'rxjs';
+import { RootStore } from '../store/store.orcchestrator';
 export interface Login {
   message: string;
   result: boolean;
@@ -17,6 +18,7 @@ export interface Login {
 })
 export class Auth {
   private http = inject(HttpClient);
+  private store = inject(RootStore);
 
   registerNewUser(
     payload: Register_Payload_Model
@@ -31,6 +33,14 @@ export class Auth {
     return this.http.post<Login>(
       'https://freeapi.miniprojectideas.com/api/JWT/login',
       payload
+    );
+  }
+
+  refreshToken() {
+    const user = this.store.auth.userToRefresh;
+    return this.http.post(
+      'https://freeapi.miniprojectideas.com/api/JWT/refresh',
+      user
     );
   }
 }

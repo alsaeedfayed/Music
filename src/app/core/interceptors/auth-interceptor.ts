@@ -29,6 +29,10 @@ export class AuthInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     const url = req.url;
+    const shouldAttach = this.shouldAttachToken(url);
+    if (!shouldAttach) {
+      return next.handle(req);
+    }
     let token: string | null = null;
     if (isPlatformBrowser(this.platformID)) {
       // Get the token from the store, which should be hydrated from the session
@@ -44,7 +48,7 @@ export class AuthInterceptor implements HttpInterceptor {
     // Check if a token exists and attach it to the request.
     if (token) {
       req = req.clone({
-        setHeaders: { JWTTOKEN: `Bearer ${token}` },
+        setHeaders: { Autherization: `Bearer ${token}` },
       });
     }
 

@@ -156,12 +156,13 @@ export class AuthModals {
         this.closeSignInModal();
         this.toast.success(res.message);
         this.store.auth.setUserSession(res.data);
+        //set cookies for SSR
         this.cookies.set('token', this.store.auth.session()?.token!, {
           httpOnly: true,
           path: '/',
           maxAge: 60 * 60 * 24 * 7, // 7 days
         });
-        console.log(this.cookies.get('token'));
+        this.authService.scheduleRefresh(res.data.token);
       },
       error: (err) => {
         this.toast.error(err.message);

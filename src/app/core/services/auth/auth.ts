@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { Register_Payload_Model } from '@app/core/models/core.models';
 import { Observable } from 'rxjs';
 import { RootStore } from '../store/store.orcchestrator';
+import { error } from 'console';
 export interface Login {
   message: string;
   result: boolean;
@@ -41,10 +42,16 @@ export class Auth {
     const user = this.store.auth.userToRefresh;
     return this.http
       .post('https://freeapi.miniprojectideas.com/api/JWT/refresh', user)
-      .subscribe((res: any) => {
-        console.log(res);
-        this.scheduleRefresh(res.token);
-      });
+      .subscribe(
+        (res: any) => {
+          console.log(res);
+          this.scheduleRefresh(res.token);
+        },
+        (error) => {
+          // this.scheduleRefresh(this.store.auth.session()?.token!);
+          this.store.auth.clearSession();
+        }
+      );
   }
 
   scheduleRefresh(token: string): void {

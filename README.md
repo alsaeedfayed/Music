@@ -1,59 +1,42 @@
-# Music
+A full-stack Angular 20 SSR application for exploring and managing music data, integrated with MusicBrainz API. The app demonstrates modern Angular practices such as Signals, Interceptors, Server-Side Rendering (SSR), State Management, and Token-based Authentication.
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.5.
+🚀 Features
 
-## Development server
+🔎 Search & Browse Music – fetch artists, albums, and tracks from the MusicBrainz API
 
-To start a local development server, run:
+👤 Authentication System – JWT token storage with SSR-safe cookies
 
-```bash
-ng serve
-```
+🔄 Global State Management – orchestrated via a custom RootStore
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+🌐 SSR (Server-Side Rendering) – improved SEO and faster first load
 
-## Code scaffolding
+🍪 Cookie Management Service – universal cookie handling for both browser and server
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+🔐 Auth Interceptor – automatically injects tokens into request headers (works in browser & SSR)
 
-```bash
-ng generate component component-name
-```
+🎨 TailwindCSS Integration – responsive and modern UI styling
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
 
-```bash
-ng generate --help
-```
 
-## Building
+🛠️ Tech Stack
 
-To build the project run:
+Frontend: Angular 20, TypeScript, RxJS, Angular Signals
 
-```bash
-ng build
-```
+SSR: Angular Universal with Express
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+API: MusicBrainz REST API
 
-## Running unit tests
+State: RootStore + Signals
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+Auth: JWT + Cookie Service + Interceptor
 
-```bash
-ng test
-```
+⚡ Getting Started
+1️⃣ Install Dependencies
+npm install
 
-## Running end-to-end tests
+2️⃣ Run in Development Mode
+npm run dev:ssr
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+3️⃣ Build & Run Production
+npm run build:ssr
+npm run serve:ssr
